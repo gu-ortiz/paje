@@ -1,24 +1,17 @@
-import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 import 'styles/globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Apollo',
   description:
-    'Descubra o universo da saúde suplementar com a inteligência e precisão de um deus',
-  icons: {
-    icon: { url: '/favicon.ico', type: 'image/x-icon' },
-    shortcut: { url: '/favicon.ico', type: 'image/x-icon' }
-  }
+    'Descubra o universo da saúde suplementar com a inteligência e precisão de um deus'
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-br" className={inter.className}>
-      <body>
-        <div id="root">{children}</div>
+    <html lang="pt-br" className="w-full h-full min-h-screen block">
+      <body className="w-full h-full min-h-screen block bg-zinc-50 text-zinc-950">
+        <div className="w-full h-full min-h-screen block">{children}</div>
       </body>
     </html>
   );
