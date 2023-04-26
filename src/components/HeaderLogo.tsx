@@ -17,7 +17,7 @@ const HeaderLogo = () => {
       <a href={'/'} onClick={handleClick}>
         <Image
           src={logo}
-          alt="Apollo"
+          alt="Pajé"
           width={40}
           height={40}
           className="flex justify-center items-center object-contain"

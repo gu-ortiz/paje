@@ -3,9 +3,9 @@ import { ReactNode } from 'react';
 import 'styles/globals.css';
 
 export const metadata = {
-  title: 'Apollo',
+  title: 'Pajé',
   description:
-    'Descubra o universo da saúde suplementar com a inteligência e precisão de um deus'
+    'Descubra o universo da saúde suplementar com a sabedoria de um pajé'
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

@@ -1,6 +1,6 @@
-# Apollo
+# Pajé
 
-Apollo é uma aplicação web desenvolvida em React, Typescript e Next que permite a pesquisa e navegação de dados da Anvisa e da Tabela TUSS.
+Pajé é uma aplicação web desenvolvida em React, Typescript e Next que permite a pesquisa e navegação de dados da Anvisa e da Tabela TUSS.
 
 ## Funcionalidades
 
