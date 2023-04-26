@@ -1,10 +1,3 @@
-import Header from 'components/Header';
-
 export default function Home() {
-  return (
-    <>
-      <Header />
-      <main className="flex">oi</main>
-    </>
-  );
+  return <main className="flex">oi</main>;
 }
