@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-br" className="w-full h-full min-h-screen block">
-      <body className="w-full h-full min-h-screen block bg-gray-50 text-zinc-950">
+      <body className="w-full h-full min-h-screen block bg-zinc-50 text-zinc-950">
         <div className="w-full h-full min-h-screen flex flex-col">
           <Header />
           <main className="w-full flex-1 flex flex-col overflow-auto">

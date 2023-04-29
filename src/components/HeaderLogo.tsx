@@ -1,4 +1,3 @@
-'use client';
 import logo from 'assets/logo.svg';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -14,16 +13,16 @@ const HeaderLogo = () => {
 
   return (
     <div className="relative h-full flex justify-center items-center">
-      <a href={'/'} onClick={handleClick}>
+      <button className="focus:outline-none" onClick={handleClick}>
         <Image
           src={logo}
           alt="Pajé"
-          width={40}
-          height={40}
-          className="flex justify-center items-center object-contain"
+          width={60}
+          height={60}
+          className="object-contain"
           onClick={handleClick}
         />
-      </a>
+      </button>
     </div>
   );
 };
