@@ -1,3 +1,3 @@
-export default function Home() {
-  return <main className="flex"> </main>;
+export default function Page() {
+  return <main className="flex">OI</main>;
 }

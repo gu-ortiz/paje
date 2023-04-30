@@ -22,7 +22,7 @@ const HeaderSearch = () => {
           value={searchQuery}
           onChange={(e) => handleSearch(e)}
         />
-        <button className="relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg text-zinc-300 bg-zinc-50 active:hover:text-zinc-300 sm:hover:text-gray-800">
+        <button className="relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg text-zinc-300 bg-zinc-50 active:hover:text-zinc-300 hover:text-gray-800">
           <MagnifyingGlassIcon className="block h-5 w-5" aria-hidden="true" />
         </button>
       </div>

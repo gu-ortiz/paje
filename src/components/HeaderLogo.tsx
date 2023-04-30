@@ -1,28 +1,20 @@
 import logo from 'assets/logo.svg';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const HeaderLogo = () => {
-  const router = useRouter();
-
-  const handleClick = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-
-    router.push('/');
-  };
-
   return (
     <div className="relative h-full flex justify-center items-center">
-      <button className="focus:outline-none" onClick={handleClick}>
+      <Link href="/" replace className="focus:outline-none">
         <Image
           src={logo}
           alt="Pajé"
           width={60}
           height={60}
           className="object-contain"
-          onClick={handleClick}
+          priority
         />
-      </button>
+      </Link>
     </div>
   );
 };
