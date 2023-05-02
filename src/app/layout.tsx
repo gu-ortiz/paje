@@ -18,7 +18,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <body className="w-full h-full min-h-screen block bg-zinc-50 text-zinc-950">
         <div className="w-full h-full min-h-screen flex flex-col">
           <Header />
-          <main className="w-full flex-1 flex flex-col overflow-auto">
+          <main className="w-full flex-1 flex flex-col overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-800 scrollbar-track-transparent">
             <div className="relative container h-full flex mx-auto px-4 sm:px-6 lg:px-8">
               <div className="relative w-full h-full flex flex-col justify-center items-center">
                 {children}

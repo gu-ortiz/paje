@@ -5,7 +5,7 @@ import HeaderSearch from './HeaderSearch';
 
 const Header = () => {
   return (
-    <header className="w-full h-24 bg-gray-800">
+    <header className="w-full h-24 bg-gray-800 select-none">
       <div className="w-full h-full flex justify-center items-center shadow-sm">
         <div className="container h-full flex mx-auto px-4 sm:px-6 lg:px-8">
           <div className="w-full h-full flex justify-between items-center">
