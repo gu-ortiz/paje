@@ -4,7 +4,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Fragment } from 'react';
 import HeaderSearch from './HeaderSearch';
 
-const Header = () => {
+const HeaderPanel = () => {
   return (
     <Disclosure as="div" className="h-full flex justify-center items-center">
       {({ open }) => (
@@ -41,4 +41,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderPanel;

@@ -1,3 +1,5 @@
+import List from 'components/HomeList';
+
 export default function Page() {
   return (
     <div className="w-full h-full flex gap-5">
@@ -7,10 +9,34 @@ export default function Page() {
         </div>
       </div>
       <div className="flex-1 py-4">
-        <div className="w-full h-full flex flex-col gap-5">
-          {/* This is the terms list */}
-          <div className="w-full h-6 p-4 rounded-md bg-white shadow-lg"></div>
-        </div>
+        <List
+          terms={[
+            {
+              codigo_tuss: 12345,
+              termo: 'Example Term',
+              tabela: '20',
+              dt_inicio_vigencia: '2023-01-01',
+              dt_fim_vigencia: '2023-12-31',
+              dt_implantacao: '2023-01-01'
+            },
+            {
+              codigo_tuss: 12345,
+              termo: 'Example Term',
+              tabela: '22',
+              dt_inicio_vigencia: '2023-01-01',
+              dt_fim_vigencia: '2023-12-31',
+              dt_implantacao: '2023-01-01'
+            },
+            {
+              codigo_tuss: 12345,
+              termo: 'Example Term',
+              tabela: '18',
+              dt_inicio_vigencia: '2023-01-01',
+              dt_fim_vigencia: '2023-12-31',
+              dt_implantacao: '2023-01-01'
+            }
+          ]}
+        />
       </div>
     </div>
   );

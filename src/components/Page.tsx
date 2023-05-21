@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export default function Page({ children }: { children: ReactNode }) {
+const Page = ({ children }: { children: ReactNode }) => {
   return (
     <main className="w-full flex-1 flex flex-col overflow-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-gray-800 scrollbar-track-transparent">
       <div className="container h-full flex mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,4 +10,6 @@ export default function Page({ children }: { children: ReactNode }) {
       </div>
     </main>
   );
-}
+};
+
+export default Page;
