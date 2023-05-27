@@ -1,27 +1,45 @@
 'use client';
 import { Menu, Transition } from '@headlessui/react';
 import {
-  BookmarkIcon,
-  Cog6ToothIcon,
+  ArrowDownTrayIcon,
+  ArrowTopRightOnSquareIcon,
   UserCircleIcon
+  // Cog6ToothIcon,
 } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 import { Fragment } from 'react';
 import { classNames } from 'utils/classnames';
 
 const menuItems = [
+  // {
+  //   name: 'Configurações',
+  //   icon: (
+  //     <Cog6ToothIcon className="block h-5 w-5 stroke-1" aria-hidden="true" />
+  //   ),
+  //   path: '',
+  //   target: '_self'
+  // },
+  {
+    name: 'Anvisa',
+    icon: (
+      <ArrowTopRightOnSquareIcon
+        className="block h-5 w-5 stroke-1"
+        aria-hidden="true"
+      />
+    ),
+    path: 'https://consultas.anvisa.gov.br/',
+    target: '_blank'
+  },
   {
     name: 'TUSS',
     icon: (
-      <BookmarkIcon className="block h-5 w-5 stroke-1" aria-hidden="true" />
+      <ArrowDownTrayIcon
+        className="block h-5 w-5 stroke-1"
+        aria-hidden="true"
+      />
     ),
-    path: ''
-  },
-  {
-    name: 'Configurações',
-    icon: (
-      <Cog6ToothIcon className="block h-5 w-5 stroke-1" aria-hidden="true" />
-    ),
-    path: ''
+    path: 'https://www.ans.gov.br/arquivos/extras/tiss/Padrao_TISS_Representacao_de_Conceitos_em_Saude_202303.zip',
+    target: '_blank'
   }
 ];
 
@@ -56,8 +74,9 @@ const HeaderMenu = () => {
               {menuItems.map((item) => (
                 <Menu.Item key={item.name}>
                   {({ active }) => (
-                    <a
+                    <Link
                       href={item.path}
+                      target={item.target}
                       className={classNames(
                         active
                           ? 'bg-zinc-300 text-zinc-50'
@@ -67,7 +86,7 @@ const HeaderMenu = () => {
                     >
                       {item.icon}
                       {item.name}
-                    </a>
+                    </Link>
                   )}
                 </Menu.Item>
               ))}

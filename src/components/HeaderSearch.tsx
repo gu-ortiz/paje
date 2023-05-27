@@ -1,14 +1,23 @@
 'use client';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 const HeaderSearch = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [text, setText] = useState('');
 
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
+  const handleSearch = () => {
+    console.log(text);
+  };
 
-    setSearchQuery(e.target.value);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.currentTarget.blur();
+      handleSearch();
+    }
   };
 
   return (
@@ -19,10 +28,14 @@ const HeaderSearch = () => {
           className="w-full h-10 pl-5 pr-0 py-2 rounded-l-lg text-zinc-300  bg-white placeholder:text-zinc-300 focus:outline-none focus:text-gray-800"
           placeholder="Pesquisar termos..."
           spellCheck="false"
-          value={searchQuery}
-          onChange={(e) => handleSearch(e)}
+          value={text}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
-        <button className="relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg text-zinc-300 bg-white active:hover:text-zinc-300 hover:text-gray-800">
+        <button
+          onClick={handleSearch}
+          className="relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg text-zinc-300 bg-white active:hover:text-zinc-300 focus:outline-none hover:text-gray-800"
+        >
           <MagnifyingGlassIcon className="block h-5 w-5" aria-hidden="true" />
         </button>
       </div>
