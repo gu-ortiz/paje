@@ -1,6 +1,6 @@
 'use client';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from 'react';
 
 const HeaderSearch = () => {
   const [text, setText] = useState('');
@@ -20,6 +20,11 @@ const HeaderSearch = () => {
     }
   };
 
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    handleSearch();
+  };
+
   return (
     <div className="relative w-full sm:w-2/3 h-full flex justify-center items-center">
       <div className="w-full flex group rounded-lg">
@@ -33,7 +38,7 @@ const HeaderSearch = () => {
           onKeyDown={handleKeyDown}
         />
         <button
-          onClick={handleSearch}
+          onClick={handleClick}
           className="relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg text-zinc-300 bg-white active:hover:text-zinc-300 focus:outline-none hover:text-gray-800"
         >
           <MagnifyingGlassIcon className="block h-5 w-5" aria-hidden="true" />

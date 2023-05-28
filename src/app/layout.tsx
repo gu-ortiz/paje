@@ -5,7 +5,10 @@ import { inter } from 'styles/fonts';
 import 'styles/globals.css';
 
 export const metadata = {
-  title: 'Pajé',
+  title: {
+    default: 'Pajé',
+    template: '%s | Pajé'
+  },
   description:
     'Descubra o universo da saúde suplementar com a sabedoria de um pajé'
 };
