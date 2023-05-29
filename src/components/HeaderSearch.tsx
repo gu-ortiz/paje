@@ -1,6 +1,7 @@
 'use client';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from 'react';
+import { classNames } from 'utils/classnames';
 
 const HeaderSearch = () => {
   const [text, setText] = useState('');
@@ -41,7 +42,12 @@ const HeaderSearch = () => {
         <button
           onClick={handleClick}
           disabled={!text}
-          className="relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg text-zinc-300 bg-white active:hover:text-zinc-300 focus:outline-none hover:text-gray-800 disabled:hover:text-zinc-300"
+          className={classNames(
+            'relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg',
+            'text-gray-800 bg-white focus:outline-none',
+            'active:text-zinc-300 active:bg-white',
+            'disabled:text-zinc-300 disabled:bg-white'
+          )}
         >
           <MagnifyingGlassIcon className="block h-5 w-5" aria-hidden="true" />
         </button>
