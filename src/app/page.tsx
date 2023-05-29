@@ -1,6 +1,9 @@
 import List from 'components/HomeList';
 
 export default async function Page() {
+  const delay = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+  await delay(2000); // delay of 10 seconds
   const response = await fetch('https://api.github.com/users/gu-ortiz/repos');
   const data = await response.json();
 

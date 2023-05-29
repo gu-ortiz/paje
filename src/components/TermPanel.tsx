@@ -33,7 +33,7 @@ const TermPanel = () => {
                 'w-full rounded-t-md py-3 text-sm font-medium leading-4',
                 selected
                   ? 'bg-gray-800 shadow text-white'
-                  : 'hover:bg-gray-800/10 hover:text-white text-gray-800'
+                  : 'hover:bg-zinc-300 hover:text-white text-gray-800'
               )
             }
           >
@@ -52,25 +52,6 @@ const TermPanel = () => {
             key={idx}
             className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
           >
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
-            <TermLabel label="Código do Termo" text={info.title} />
             <TermLabel label="Código do Termo" text={info.title} />
           </Tab.Panel>
         ))}

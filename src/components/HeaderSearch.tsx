@@ -6,6 +6,7 @@ const HeaderSearch = () => {
   const [text, setText] = useState('');
 
   const handleSearch = () => {
+    if (!text) return;
     console.log(text);
   };
 
@@ -39,7 +40,8 @@ const HeaderSearch = () => {
         />
         <button
           onClick={handleClick}
-          className="relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg text-zinc-300 bg-white active:hover:text-zinc-300 focus:outline-none hover:text-gray-800"
+          disabled={!text}
+          className="relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg text-zinc-300 bg-white active:hover:text-zinc-300 focus:outline-none hover:text-gray-800 disabled:hover:text-zinc-300"
         >
           <MagnifyingGlassIcon className="block h-5 w-5" aria-hidden="true" />
         </button>
