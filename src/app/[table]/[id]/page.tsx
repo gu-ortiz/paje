@@ -1,3 +1,4 @@
+import TermPanel from 'components/TermPanel';
 import { notFound } from 'next/navigation';
 
 export default async function Page({
@@ -9,12 +10,11 @@ export default async function Page({
 
   if (response.status !== 200) notFound();
 
-  const data = await response.json();
+  // const data = await response.json();
 
   return (
-    <div className="w-full h-full flex gap-5">
-      Tabela: {table} - Código TUSS: {id}
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+    <div className="w-full h-fit flex flex-col py-4 sm:py-6 lg:py-8">
+      <TermPanel />
     </div>
   );
 }

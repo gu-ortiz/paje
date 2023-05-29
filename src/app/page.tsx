@@ -31,21 +31,6 @@ export default async function Page() {
       </div>
       <div className="flex-1 flex flex-col py-4 gap-5">
         <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
-        <List terms={terms} />
       </div>
     </div>
   );

@@ -27,10 +27,10 @@ const HeaderSearch = () => {
 
   return (
     <div className="relative w-full sm:w-2/3 h-full flex justify-center items-center">
-      <div className="w-full flex group rounded-lg">
+      <div className="w-full flex rounded-lg">
         <input
           type="text"
-          className="w-full h-10 pl-5 pr-0 py-2 rounded-l-lg text-zinc-300  bg-white placeholder:text-zinc-300 focus:outline-none focus:text-gray-800"
+          className="w-full h-10 pl-5 pr-0 py-2 rounded-l-lg text-zinc-300 bg-white placeholder:text-zinc-300 focus:outline-none focus:text-gray-800"
           placeholder="Pesquisar termos..."
           spellCheck="false"
           value={text}
