@@ -1,6 +1,7 @@
-import HomeCard, { Term } from './HomeCard';
+import { TermType } from 'types/term';
+import HomeCard from './HomeCard';
 
-const HomeList = ({ terms }: { terms: Term[] }) => {
+const HomeList = ({ terms }: { terms: TermType[] }) => {
   return (
     <div className="w-full flex flex-col gap-5">
       {terms.map((term) => (

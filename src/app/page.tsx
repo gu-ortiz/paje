@@ -1,28 +1,9 @@
-import List from 'components/HomeList';
+import HomeList from 'components/HomeList';
+import { getTerms } from 'utils/api';
 
 export default async function Page() {
-  const delay = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
-  await delay(2000); // delay of 10 seconds
-  const response = await fetch('https://api.github.com/users/gu-ortiz/repos');
-  const data = await response.json();
-
-  const terms = data.map(
-    (item: {
-      id: number;
-      full_name: string;
-      size: number;
-      created_at: string;
-      updated_at: string;
-      pushed_at: string;
-    }) => ({
-      codigo_tuss: item.full_name,
-      termo: item.full_name,
-      tabela: item.size,
-      dt_inicio_vigencia: item.updated_at,
-      dt_fim_vigencia: item.pushed_at,
-      dt_implantacao: item.created_at
-    })
+  const data = await getTerms(
+    `${process.env.NEXT_PUBLIC_API_URL}/procedimentos/?page=1`
   );
 
   return (
@@ -33,7 +14,7 @@ export default async function Page() {
         </div>
       </div>
       <div className="flex-1 flex flex-col py-4 gap-5">
-        <List terms={terms} />
+        {data.length > 0 && <HomeList terms={data} />}
       </div>
     </div>
   );

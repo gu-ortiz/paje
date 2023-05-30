@@ -44,9 +44,8 @@ const HeaderSearch = () => {
           disabled={!text}
           className={classNames(
             'relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg',
-            'text-gray-800 bg-white focus:outline-none',
-            'active:text-zinc-300 active:bg-white',
-            'disabled:text-zinc-300 disabled:bg-white'
+            'text-zinc-300 bg-white focus:outline-none',
+            'hover:text-gray-800 active:text-zinc-300 disabled:text-zinc-300'
           )}
         >
           <MagnifyingGlassIcon className="block h-5 w-5" aria-hidden="true" />

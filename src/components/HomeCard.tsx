@@ -1,16 +1,8 @@
 import Link from 'next/link';
+import { TermType } from 'types/term';
 import { formatDate } from 'utils/date';
 
-export interface Term {
-  codigo_tuss: string | number;
-  termo: string;
-  tabela: string | number;
-  dt_inicio_vigencia: string;
-  dt_fim_vigencia: string;
-  dt_implantacao: string;
-}
-
-const HomeCard = ({ term }: { term: Term }) => {
+const HomeCard = ({ term }: { term: TermType }) => {
   return (
     <Link
       href={`${term.codigo_tuss}`}
