@@ -3,7 +3,7 @@ import { getTerms } from 'utils/api';
 
 export default async function Page() {
   const data = await getTerms(
-    `${process.env.NEXT_PUBLIC_API_URL}/procedimentos/?page=1`
+    `${process.env.NEXT_PUBLIC_API_URL}/termos_tuss/?page=1`
   );
 
   return (

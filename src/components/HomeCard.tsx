@@ -5,7 +5,7 @@ import { formatDate } from 'utils/date';
 const HomeCard = ({ term }: { term: TermType }) => {
   return (
     <Link
-      href={`${term.codigo_tuss}`}
+      href={`${term.tabela}/${term.codigo_tuss}`}
       className="w-full px-5 py-2 rounded-md bg-white shadow-lg overflow-hidden"
     >
       <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-[1fr_2fr] 2xl:grid-cols-[1fr_3fr_1fr_1fr_1fr]">
