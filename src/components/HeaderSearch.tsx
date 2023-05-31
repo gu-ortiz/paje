@@ -8,7 +8,6 @@ const HeaderSearch = () => {
 
   const handleSearch = () => {
     if (!text) return;
-    console.log(text);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
