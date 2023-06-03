@@ -1,5 +1,6 @@
 import Header from 'components/Header';
 import Page from 'components/Page';
+import { SearchProvider } from 'context/Search';
 import { ReactNode } from 'react';
 import { inter } from 'styles/fonts';
 import 'styles/globals.css';
@@ -21,8 +22,10 @@ export default function Layout({ children }: { children: ReactNode }) {
     >
       <body className="w-full h-full min-h-screen block bg-zinc-50 text-zinc-950">
         <div className="w-full h-full min-h-screen flex flex-col">
-          <Header />
-          <Page>{children}</Page>
+          <SearchProvider>
+            <Header />
+            <Page>{children}</Page>
+          </SearchProvider>
         </div>
       </body>
     </html>

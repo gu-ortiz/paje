@@ -1,4 +1,4 @@
-const LoadingSidebar = () => {
+const SkeletonSidebar = () => {
   return (
     <div className="w-full h-fit p-4 rounded-md bg-white shadow-lg overflow-hidden">
       <div className="w-full gap-8 grid grid-cols-1">
@@ -13,4 +13,4 @@ const LoadingSidebar = () => {
   );
 };
 
-export default LoadingSidebar;
+export default SkeletonSidebar;

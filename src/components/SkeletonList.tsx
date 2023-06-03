@@ -1,4 +1,4 @@
-const LoadingList = () => {
+const SkeletonList = () => {
   return (
     <div className="w-full flex flex-col gap-5">
       {[...Array(3)].map((_, i) => (
@@ -34,4 +34,4 @@ const LoadingList = () => {
   );
 };
 
-export default LoadingList;
+export default SkeletonList;

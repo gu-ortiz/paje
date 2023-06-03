@@ -4,11 +4,11 @@ import { formatDate } from 'utils/date';
 
 const HomeCard = ({ term }: { term: TermType }) => {
   return (
-    <Link
-      href={`${term.tabela}/${term.codigo_tuss}`}
-      className="w-full px-5 py-2 rounded-md bg-white shadow-lg overflow-hidden"
-    >
-      <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-[1fr_2fr] 2xl:grid-cols-[1fr_3fr_1fr_1fr_1fr]">
+    <li className="w-full rounded-md bg-white shadow-lg overflow-hidden">
+      <Link
+        href={`${term.tabela}/${term.codigo_tuss}`}
+        className="w-full px-5 py-2 gap-4 grid grid-cols-1 lg:grid-cols-[1fr_2fr] 2xl:grid-cols-[1fr_3fr_1fr_1fr_1fr]"
+      >
         <div className="flex flex-col">
           <span className="text-sm font-bold">Código</span>
           <span className="">{term.codigo_tuss}</span>
@@ -29,8 +29,8 @@ const HomeCard = ({ term }: { term: TermType }) => {
           <span className="text-sm font-bold">Fim de Implantação</span>
           <span className="">{formatDate(term.dt_implantacao)}</span>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </li>
   );
 };
 

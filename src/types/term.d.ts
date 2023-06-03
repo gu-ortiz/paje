@@ -5,5 +5,6 @@ export interface TermType {
   dt_inicio_vigencia: string;
   dt_fim_vigencia: string;
   dt_implantacao: string;
-  anvisa?: unknown;
+  extra_fields: { [key: string]: string } | null;
+  anvisa: { [key: string]: string } | null;
 }

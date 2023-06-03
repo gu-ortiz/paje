@@ -19,8 +19,8 @@ const TermField = ({ text }: { text: string }) => {
     <div className="w-full flex group rounded-lg">
       <input
         type="text"
-        className="w-full h-10 pl-5 pr-0 py-2 rounded-l-lg text-zinc-300 bg-white placeholder:text-zinc-300 focus:outline-none focus:text-gray-800"
-        placeholder="Pesquisar termos..."
+        className="w-full h-10 pl-5 pr-0 py-2 rounded-l-lg text-zinc-300 bg-white placeholder:text-zinc-300 focus:outline-none focus:text-gray-800 cursor-text"
+        placeholder=""
         spellCheck="false"
         value={text}
         disabled

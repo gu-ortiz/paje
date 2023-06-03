@@ -1,14 +1,16 @@
 'use client';
 import HomeCard from 'components/HomeCard';
-import LoadingList from 'components/LoadingList';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import SkeletonList from 'components/SkeletonList';
+import { SearchContext } from 'context/Search';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { TermType } from 'types/term';
 import { getTerms } from 'utils/api';
 
-export default function HomeList() {
+const HomeList = () => {
+  const { searchText } = useContext(SearchContext);
   const [data, setData] = useState<TermType[]>([]);
   const [nextPageUrl, setNextPageUrl] = useState(
-    `http://localhost:3000/api/termos_tuss?page=1`
+    `http://localhost:3000/api/termos_tuss?&query=${searchText}&page=1`
   );
   const [loading, setLoading] = useState(true);
   const loader = useRef(null);
@@ -53,18 +55,20 @@ export default function HomeList() {
       setLoading(false);
     };
     fetchData();
-  }, [nextPageUrl, loading]);
+  }, [nextPageUrl, loading, searchText]);
 
   return (
-    <div className="w-full flex flex-col gap-5">
+    <ul className="w-full flex flex-col gap-5">
       {data.map((term, index) => (
         <HomeCard key={index} term={term} />
       ))}
       {nextPageUrl && (
         <div className="w-full h-fit" ref={loader}>
-          {loading && <LoadingList />}
+          {loading && <SkeletonList />}
         </div>
       )}
-    </div>
+    </ul>
   );
-}
+};
+
+export default HomeList;

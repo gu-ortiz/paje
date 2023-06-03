@@ -13,16 +13,23 @@ const TermPanel = ({ term }: { term: TermType }) => {
       codigo_tuss: term.codigo_tuss,
       termo: term.termo,
       tabela: term.tabela,
-      dt_inicio_vigencia: formatDate(term.dt_inicio_vigencia),
-      dt_fim_vigencia: formatDate(term.dt_fim_vigencia),
-      dt_implantacao: formatDate(term.dt_implantacao)
+      dt_inicio_vigencia: term.dt_inicio_vigencia
+        ? formatDate(term.dt_inicio_vigencia)
+        : '',
+      dt_fim_vigencia: term.dt_fim_vigencia
+        ? formatDate(term.dt_fim_vigencia)
+        : '',
+      dt_implantacao: term.dt_implantacao
+        ? formatDate(term.dt_implantacao)
+        : '',
+      extra_fields: term.extra_fields || {}
     },
     Anvisa: term.anvisa || {}
   });
 
   return (
     <Tab.Group>
-      <Tab.List className="w-full sm:w-2/3 lg:w-1/2 flex rounded-t-md bg-white">
+      <Tab.List className="w-full lg:w-1/2 flex rounded-t-md bg-white">
         {Object.keys(options).map(
           (option) =>
             Object.keys(options[option as keyof typeof options]).length > 0 && (
@@ -30,9 +37,9 @@ const TermPanel = ({ term }: { term: TermType }) => {
                 key={option}
                 className={({ selected }) =>
                   classNames(
-                    'w-full rounded-t-md py-3 text-sm font-medium leading-4',
+                    'w-full rounded-t-md py-3 text-sm font-medium leading-4 focus:outline-none',
                     selected
-                      ? 'bg-gray-800 shadow text-white'
+                      ? 'bg-gray-800 shadow text-white cursor-default'
                       : 'hover:bg-gray-800/10 hover:text-white text-gray-800'
                   )
                 }
@@ -45,7 +52,7 @@ const TermPanel = ({ term }: { term: TermType }) => {
       <Tab.Panels
         className={classNames(
           'w-full h-fit p-4 sm:p-6 lg:p-8 text-white',
-          'rounded-b-md sm:rounded-tr-md bg-gray-800 shadow-lg overflow-hidden'
+          'rounded-b-md lg:rounded-tr-md bg-gray-800 shadow-lg overflow-hidden'
         )}
       >
         {Object.values(options).map((info, idx) => (
@@ -53,13 +60,29 @@ const TermPanel = ({ term }: { term: TermType }) => {
             key={idx}
             className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
           >
-            {Object.keys(info).map((label) => (
-              <TermLabel
-                key={label}
-                label={getTermLabel(label)}
-                text={info[label as keyof typeof info]}
-              />
-            ))}
+            {Object.keys(info)
+              .filter((i) => i !== 'extra_fields')
+              .map((label) => (
+                <TermLabel
+                  key={label}
+                  label={getTermLabel(label)}
+                  text={String(info[label as keyof typeof info])}
+                />
+              ))}
+            {info.extra_fields &&
+              typeof info.extra_fields === 'object' &&
+              Object.keys(info.extra_fields).map((label) => {
+                const extraFields = info.extra_fields as {
+                  [key: string]: string;
+                };
+                return (
+                  <TermLabel
+                    key={label}
+                    label={getTermLabel(label)}
+                    text={String(extraFields[label])}
+                  />
+                );
+              })}
           </Tab.Panel>
         ))}
       </Tab.Panels>

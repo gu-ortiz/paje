@@ -1,17 +1,18 @@
 'use client';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from 'react';
+import { SearchContext } from 'context/Search';
+import { ChangeEvent, KeyboardEvent, MouseEvent, useContext } from 'react';
 import { classNames } from 'utils/classnames';
 
 const HeaderSearch = () => {
-  const [text, setText] = useState('');
+  const { searchText, setSearchText } = useContext(SearchContext);
 
   const handleSearch = () => {
-    if (!text) return;
+    if (!searchText) return;
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
+    setSearchText(e.target.value);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -32,15 +33,15 @@ const HeaderSearch = () => {
         <input
           type="text"
           className="w-full h-10 pl-5 pr-0 py-2 rounded-l-lg text-zinc-300 bg-white placeholder:text-zinc-300 focus:outline-none focus:text-gray-800"
-          placeholder="Pesquisar termos..."
+          placeholder="Pesquisar..."
           spellCheck="false"
-          value={text}
+          value={searchText}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
         <button
           onClick={handleClick}
-          disabled={!text}
+          disabled={!searchText}
           className={classNames(
             'relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg',
             'text-zinc-300 bg-white focus:outline-none',

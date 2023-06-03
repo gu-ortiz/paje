@@ -3,32 +3,24 @@ import { Menu, Transition } from '@headlessui/react';
 import {
   ArrowDownTrayIcon,
   ArrowTopRightOnSquareIcon,
-  UserCircleIcon
-  // Cog6ToothIcon,
+  EllipsisHorizontalCircleIcon,
+  QuestionMarkCircleIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { classNames } from 'utils/classnames';
 
 const menuItems = [
-  // {
-  //   name: 'Configurações',
-  //   icon: (
-  //     <Cog6ToothIcon className="block h-5 w-5 stroke-1" aria-hidden="true" />
-  //   ),
-  //   path: '',
-  //   target: '_self'
-  // },
   {
-    name: 'Anvisa',
+    name: 'Ajuda',
     icon: (
-      <ArrowTopRightOnSquareIcon
+      <QuestionMarkCircleIcon
         className="block h-5 w-5 stroke-1"
         aria-hidden="true"
       />
     ),
-    path: 'https://consultas.anvisa.gov.br/',
-    target: '_blank'
+    path: '/ajuda',
+    target: '_self'
   },
   {
     name: 'TUSS',
@@ -39,6 +31,17 @@ const menuItems = [
       />
     ),
     path: 'https://www.ans.gov.br/arquivos/extras/tiss/Padrao_TISS_Representacao_de_Conceitos_em_Saude_202303.zip',
+    target: '_blank'
+  },
+  {
+    name: 'Anvisa',
+    icon: (
+      <ArrowTopRightOnSquareIcon
+        className="block h-5 w-5 stroke-1"
+        aria-hidden="true"
+      />
+    ),
+    path: 'https://consultas.anvisa.gov.br/',
     target: '_blank'
   }
 ];
@@ -55,7 +58,7 @@ const HeaderMenu = () => {
                 'inline-flex items-center justify-center rounded-full sm:hover:text-white focus:outline-none'
               )}
             >
-              <UserCircleIcon
+              <EllipsisHorizontalCircleIcon
                 className="block h-10 w-10 stroke-1"
                 aria-hidden="true"
               />
