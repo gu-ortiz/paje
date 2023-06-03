@@ -1,14 +1,12 @@
 # Pajé
 
-Pajé é uma aplicação web desenvolvida em React, Typescript e Next que permite a pesquisa e navegação de dados da Anvisa e da Tabela TUSS.
+Pajé é uma aplicação web que permite a pesquisa de dados das tabelas TUSS (Terminologia Unificada da Saúde Suplementar) do padrão TISS (Troca de Informações na Saúde Suplementar) estabelecido pela ANS.
 
 ## Funcionalidades
 
-- Pesquisa de medicamentos e produtos da Anvisa;
-- Pesquisa de procedimentos, materiais e medicamentos da Tabela TUSS;
-- Navegação por categorias de produtos e procedimentos;
-- Visualização de informações detalhadas sobre produtos e procedimentos;
-- Marcação de favoritos para acesso rápido.
+- Pesquisa de termos presentes na TUSS;
+- Visualização de informações detalhadas sobre estes termos;
+- Visualização de informações fornecidas pela Anvisa para medicamentos e materiais.
 
 ## Tecnologias Utilizadas
 
@@ -16,6 +14,8 @@ Pajé é uma aplicação web desenvolvida em React, Typescript e Next que permit
 - Typescript
 - Next
 - Tailwind
+- Headless UI
+- Heroicons
 
 ## Como executar a aplicação
 
