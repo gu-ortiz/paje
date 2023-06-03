@@ -1,18 +1,27 @@
 'use client';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { SearchContext } from 'context/Search';
-import { ChangeEvent, KeyboardEvent, MouseEvent, useContext } from 'react';
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  MouseEvent,
+  useContext,
+  useState
+} from 'react';
 import { classNames } from 'utils/classnames';
 
 const HeaderSearch = () => {
-  const { searchText, setSearchText } = useContext(SearchContext);
+  const [text, setText] = useState('');
+  const { setSearchText } = useContext(SearchContext);
 
   const handleSearch = () => {
-    if (!searchText) return;
+    if (!text) return;
+
+    setSearchText(text);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
+    setText(e.target.value);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -35,13 +44,13 @@ const HeaderSearch = () => {
           className="w-full h-10 pl-5 pr-0 py-2 rounded-l-lg text-zinc-300 bg-white placeholder:text-zinc-300 focus:outline-none focus:text-gray-800"
           placeholder="Pesquisar..."
           spellCheck="false"
-          value={searchText}
+          value={text}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
         <button
           onClick={handleClick}
-          disabled={!searchText}
+          disabled={!text}
           className={classNames(
             'relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg',
             'text-zinc-300 bg-white focus:outline-none',

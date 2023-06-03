@@ -5,13 +5,12 @@ import { SearchContext } from 'context/Search';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { TermType } from 'types/term';
 import { getTerms } from 'utils/api';
+import { getSearchParam, getTablesParam } from 'utils/params';
 
 const HomeList = () => {
-  const { searchText } = useContext(SearchContext);
+  const { searchText, filterTables } = useContext(SearchContext);
   const [data, setData] = useState<TermType[]>([]);
-  const [nextPageUrl, setNextPageUrl] = useState(
-    `http://localhost:3000/api/termos_tuss?&query=${searchText}&page=1`
-  );
+  const [nextPageUrl, setNextPageUrl] = useState('');
   const [loading, setLoading] = useState(true);
   const loader = useRef(null);
 
@@ -45,17 +44,28 @@ const HomeList = () => {
   }, [handleObserver]);
 
   useEffect(() => {
+    setData([]);
+    setNextPageUrl(
+      `${process.env.NEXT_PUBLIC_API_URL}/search/?page=1${getTablesParam(
+        filterTables
+      )}${getSearchParam(searchText)}`
+    );
+  }, [searchText, filterTables]);
+
+  useEffect(() => {
     if (!loading) {
       return;
     }
+
     const fetchData = async () => {
       const newData = await getTerms(nextPageUrl);
-      setData((prevData) => [...prevData, ...newData.results]);
-      setNextPageUrl(newData.next);
+      if (newData.length > 0) setData((prevData) => [...prevData, ...newData]);
+      setNextPageUrl('');
       setLoading(false);
     };
+
     fetchData();
-  }, [nextPageUrl, loading, searchText]);
+  }, [nextPageUrl, loading]);
 
   return (
     <ul className="w-full flex flex-col gap-5">

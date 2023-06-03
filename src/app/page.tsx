@@ -1,3 +1,4 @@
+import Filter from 'components/Filter';
 import HomeList from 'components/HomeList';
 import SkeletonSidebar from 'components/SkeletonSidebar';
 import { Suspense } from 'react';
@@ -7,8 +8,8 @@ export default async function Page() {
     <div className="w-full h-full flex gap-5">
       <div className="w-64 sticky top-0 hidden sm:block py-4 self-start">
         <Suspense fallback={<SkeletonSidebar />}>
-          <div className="w-full h-80 p-4 rounded-md bg-gray-800 shadow-lg overflow-hidden focus:outline-none">
-            {/* This is the sidebar */}
+          <div className="w-full h-fit p-4 pb-0 rounded-md bg-white shadow-lg overflow-hidden focus:outline-none">
+            <Filter />
           </div>
         </Suspense>
       </div>

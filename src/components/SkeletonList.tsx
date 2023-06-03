@@ -1,7 +1,7 @@
 const SkeletonList = () => {
   return (
     <div className="w-full flex flex-col gap-5">
-      {[...Array(3)].map((_, i) => (
+      {[...Array(4)].map((_, i) => (
         <div
           key={i}
           className="w-full px-5 py-3 rounded-md bg-white shadow-lg overflow-hidden"

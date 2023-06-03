@@ -7,7 +7,7 @@ export default async function Page({
   params: { table: string; id: string };
 }) {
   const data = await getTerm(
-    `${process.env.NEXT_PUBLIC_API_URL}/?tabela=${table}&codigo_tuss=${id}`
+    `${process.env.NEXT_PUBLIC_API_URL}/termos_tuss/?tabela=${table}&codigo_tuss=${id}`
   );
 
   return (
