@@ -1,4 +1,5 @@
 'use client';
+import { getError } from 'utils/error';
 
 export default function Error({
   error,
@@ -12,7 +13,7 @@ export default function Error({
       <div className="text-center">
         <p className="text-base font-semibold text-zinc-300">Ops...</p>
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-800 sm:text-5xl">
-          {error.message}
+          {getError(error.message)}
         </h1>
         <p className="mt-6 text-base leading-7 text-zinc-300">
           Tente novamente mais tarde
