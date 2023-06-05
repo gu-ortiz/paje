@@ -5,7 +5,7 @@ import { SearchContext } from 'context/Search';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { TermType } from 'types/term';
 import { getTerms } from 'utils/api';
-import { getSearchParam, getTablesParam } from 'utils/params';
+import { getSearchParam, getTablesParam, isValidURL } from 'utils/url';
 
 const HomeList = () => {
   const { searchText, filterTables } = useContext(SearchContext);
@@ -49,34 +49,32 @@ const HomeList = () => {
   }, [handleObserver]);
 
   useEffect(() => {
-    console.log('useEffect');
     setData([]);
-    setNextPageUrl(
-      `${process.env.NEXT_PUBLIC_API_URL}/search/?page=1${getTablesParam(
-        filterTables
-      )}${getSearchParam(searchText)}`
-    );
+    if (searchText)
+      setNextPageUrl(
+        `${process.env.NEXT_PUBLIC_API_URL}/search/?page=1${getTablesParam(
+          filterTables
+        )}${getSearchParam(searchText)}`
+      );
   }, [searchText, filterTables]);
 
   useEffect(() => {
-    if (!loading || !nextPageUrl || status.error) {
-      return;
-    }
-
     const fetchData = async () => {
-      console.log('fetchData');
-      const response = await getTerms(nextPageUrl);
-      setStatus({
-        status: response.status,
-        statusText: response.statusText,
-        error: response.error
-      });
-      setData((prevData) => ({
-        ...prevData,
-        results: [...prevData, ...response.body.results]
-      }));
-      setNextPageUrl(response.body.next || '');
-      setLoading(false);
+      if (loading && isValidURL(nextPageUrl) && !status.error) {
+        const response = await getTerms(nextPageUrl);
+
+        setStatus({
+          status: response.status,
+          statusText: response.statusText,
+          error: response.error
+        });
+        setData((prevData) => ({
+          ...prevData,
+          results: [...prevData, ...response.body.results]
+        }));
+        setNextPageUrl(response.body.next || '');
+        setLoading(false);
+      }
     };
     fetchData();
   }, [nextPageUrl, loading, status.error]);

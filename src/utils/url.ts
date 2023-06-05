@@ -1,5 +1,14 @@
 import { FilterKeysType } from 'types/search';
 
+export function isValidURL(url: string) {
+  try {
+    new URL(url);
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
 export function getSearchParam(query: string) {
   return query ? `&query=${query}` : '';
 }
