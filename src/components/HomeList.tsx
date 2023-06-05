@@ -68,10 +68,7 @@ const HomeList = () => {
           statusText: response.statusText,
           error: response.error
         });
-        setData((prevData) => ({
-          ...prevData,
-          results: [...prevData, ...response.body.results]
-        }));
+        setData((prevData) => [...prevData, ...response.body.results]);
         setNextPageUrl(response.body.next || '');
         setLoading(false);
       }
@@ -79,9 +76,11 @@ const HomeList = () => {
     fetchData();
   }, [nextPageUrl, loading, status.error]);
 
-  if (status.error) {
-    throw new Error(String(status.status));
-  }
+  useEffect(() => {
+    if (status.error) {
+      throw new Error(String(status.status));
+    }
+  }, [status.error, status.status]);
 
   return (
     <ul className="w-full flex flex-col gap-5">
