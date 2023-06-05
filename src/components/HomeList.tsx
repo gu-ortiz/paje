@@ -12,6 +12,11 @@ const HomeList = () => {
   const [data, setData] = useState<TermType[]>([]);
   const [nextPageUrl, setNextPageUrl] = useState('');
   const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState({
+    status: 200,
+    statusText: '',
+    error: false
+  });
   const loader = useRef(null);
 
   const handleObserver = useCallback(
@@ -44,6 +49,7 @@ const HomeList = () => {
   }, [handleObserver]);
 
   useEffect(() => {
+    console.log('useEffect');
     setData([]);
     setNextPageUrl(
       `${process.env.NEXT_PUBLIC_API_URL}/search/?page=1${getTablesParam(
@@ -53,19 +59,31 @@ const HomeList = () => {
   }, [searchText, filterTables]);
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading || !nextPageUrl || status.error) {
       return;
     }
 
     const fetchData = async () => {
-      const newData = await getTerms(nextPageUrl);
-      if (newData.length > 0) setData((prevData) => [...prevData, ...newData]);
-      setNextPageUrl('');
+      console.log('fetchData');
+      const response = await getTerms(nextPageUrl);
+      setStatus({
+        status: response.status,
+        statusText: response.statusText,
+        error: response.error
+      });
+      setData((prevData) => ({
+        ...prevData,
+        results: [...prevData, ...response.body.results]
+      }));
+      setNextPageUrl(response.body.next || '');
       setLoading(false);
     };
-
     fetchData();
-  }, [nextPageUrl, loading]);
+  }, [nextPageUrl, loading, status.error]);
+
+  if (status.error) {
+    throw new Error(String(status.status));
+  }
 
   return (
     <ul className="w-full flex flex-col gap-5">
@@ -73,9 +91,9 @@ const HomeList = () => {
         <HomeCard key={index} term={term} />
       ))}
       {nextPageUrl && (
-        <div className="w-full h-fit" ref={loader}>
+        <li className="w-full h-fit" ref={loader}>
           {loading && <SkeletonList />}
-        </div>
+        </li>
       )}
     </ul>
   );

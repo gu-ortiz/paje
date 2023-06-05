@@ -1,4 +1,4 @@
-export interface TermType {
+export type TermType = {
   codigo_tuss: string;
   termo: string;
   tabela: number;
@@ -7,4 +7,4 @@ export interface TermType {
   dt_implantacao: string;
   extra_fields: { [key: string]: string } | null;
   anvisa: { [key: string]: string } | null;
-}
+};

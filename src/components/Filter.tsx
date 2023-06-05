@@ -4,6 +4,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { SearchContext } from 'context/Search';
 import { useContext } from 'react';
 import { FilterKeysType } from 'types/search';
+import { getTable } from 'utils/tuss';
 import FilterCheckbox from './FilterCheckbox';
 
 const Filter = () => {
@@ -18,38 +19,21 @@ const Filter = () => {
 
   return (
     <div className="w-full h-fit flex flex-col gap-3 bg-transparent">
-      <FilterCheckbox
-        label="Diárias e Taxas"
-        checked={filterTables['18']}
-        onChange={() => handleCheckboxChange('18')}
-      />
-      <FilterCheckbox
-        label="Materiais e OPME"
-        checked={filterTables['19']}
-        onChange={() => handleCheckboxChange('19')}
-      />
-      <FilterCheckbox
-        label="Medicamentos"
-        checked={filterTables['20']}
-        onChange={() => handleCheckboxChange('20')}
-      />
-      <FilterCheckbox
-        label="Procedimentos"
-        checked={filterTables['22']}
-        onChange={() => handleCheckboxChange('22')}
-      />
-      <FilterCheckbox
-        label="Demais terminologias"
-        checked={filterTables.demaisTerminologias}
-        onChange={() => handleCheckboxChange('demaisTerminologias')}
-      />
+      {Object.keys(filterTables).map((table, i) => (
+        <FilterCheckbox
+          key={i}
+          label={getTable(table)}
+          checked={filterTables[table as FilterKeysType]}
+          onChange={() => handleCheckboxChange(table as FilterKeysType)}
+        />
+      ))}
       <Disclosure>
         {({ open }) => (
           <>
             <Disclosure.Panel className="px-4 py-2 text-sm text-gray-800">
               oi
             </Disclosure.Panel>
-            <Disclosure.Button className="w-full flex justify-center items-center rounded-lg bg-white px-4 py-2 text-center text-sm text-gray-800 focus:outline-none">
+            <Disclosure.Button className="w-full flex justify-center items-center bg-transparent px-4 py-2 focus:outline-none">
               <ChevronDownIcon
                 className={`${
                   open ? 'rotate-180 transform' : ''

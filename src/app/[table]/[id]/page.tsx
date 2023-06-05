@@ -10,9 +10,13 @@ export default async function Page({
     `${process.env.NEXT_PUBLIC_API_URL}/termos_tuss/?tabela=${table}&codigo_tuss=${id}`
   );
 
+  if (data.error) {
+    throw new Error(String(data.status));
+  }
+
   return (
     <>
-      <TermPanel term={data.results[0]} />
+      <TermPanel term={data.body} />
     </>
   );
 }

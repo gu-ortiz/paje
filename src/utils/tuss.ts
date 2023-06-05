@@ -1,15 +1,15 @@
 export function getTable(id: string | number) {
   switch (id) {
     case '18' || 18:
-      return 'diarias-e-taxas';
+      return 'Diárias e Taxas';
     case '19' || 19:
-      return 'materiais-e-opme';
+      return 'Materiais e OPME';
     case '20' || 20:
-      return 'medicamentos';
+      return 'Medicamentos';
     case '22' || 22:
-      return 'procedimentos';
+      return 'Procedimentos';
     default:
-      return 'demais-terminologias';
+      return 'Demais Terminologias';
   }
 }
 
