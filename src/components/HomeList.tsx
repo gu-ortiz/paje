@@ -60,7 +60,7 @@ const HomeList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (loading && isValidURL(nextPageUrl) && !status.error) {
+      if (isValidURL(nextPageUrl) && loading && !status.error) {
         const response = await getTerms(nextPageUrl);
 
         setStatus({
