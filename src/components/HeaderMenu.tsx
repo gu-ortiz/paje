@@ -73,7 +73,7 @@ const HeaderMenu = () => {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-zinc-300 overflow-hidden focus:outline-none">
+            <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg overflow-hidden focus:outline-none">
               {menuItems.map((item) => (
                 <Menu.Item key={item.name}>
                   {({ active }) => (
@@ -81,10 +81,10 @@ const HeaderMenu = () => {
                       href={item.path}
                       target={item.target}
                       className={classNames(
+                        'flex gap-2 px-4 py-2 text-sm',
                         active
-                          ? 'bg-zinc-300 text-zinc-50'
-                          : 'bg-transparent text-gray-800',
-                        'flex gap-2 px-4 py-2 text-sm'
+                          ? 'bg-gray-800 text-white'
+                          : 'bg-transparent text-gray-800'
                       )}
                     >
                       {item.icon}

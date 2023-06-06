@@ -39,7 +39,10 @@ const HeaderSearch = () => {
       <div className="w-full flex rounded-lg">
         <input
           type="text"
-          className="w-full h-10 pl-5 pr-0 py-2 rounded-l-lg text-zinc-300 bg-white placeholder:text-zinc-300 focus:outline-none focus:text-gray-800"
+          className={classNames(
+            'w-full h-10 pl-5 pr-0 py-2 rounded-l-lg focus:outline-none',
+            'text-zinc-300 bg-white placeholder:text-zinc-300 focus:text-gray-800'
+          )}
           placeholder="Pesquisar..."
           spellCheck="false"
           value={text}

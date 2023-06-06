@@ -2,7 +2,7 @@
 import { ReactNode, createContext, useState } from 'react';
 import { FilterKeysType, SearchContextType } from 'types/search';
 
-const initialFilterTables = {
+const initialCheckboxState = {
   '18': false,
   '19': false,
   '20': false,
@@ -10,14 +10,23 @@ const initialFilterTables = {
   demaisTerminologias: false
 };
 
+const initialSelectState = {
+  id: 0,
+  value: ''
+};
+
 const initialContext = {
   searchText: '',
   setSearchText: () => {
     throw new Error('setSearchTerm was called without being initialized');
   },
-  filterTables: initialFilterTables,
+  filterTables: initialCheckboxState,
   setFilterTables: () => {
     throw new Error('setFilterTables was called without being initialized');
+  },
+  filterLaboratory: initialSelectState,
+  setFilterLaboratory: () => {
+    throw new Error('setFilterLaboratory was called without being initialized');
   }
 };
 
@@ -26,11 +35,19 @@ export const SearchContext = createContext<SearchContextType>(initialContext);
 export const SearchProvider = ({ children }: { children: ReactNode }) => {
   const [searchText, setSearchText] = useState(initialContext.searchText);
   const [filterTables, setFilterTables] =
-    useState<Record<FilterKeysType, boolean>>(initialFilterTables);
+    useState<Record<FilterKeysType, boolean>>(initialCheckboxState);
+  const [filterLaboratory, setFilterLaboratory] = useState(initialSelectState);
 
   return (
     <SearchContext.Provider
-      value={{ searchText, setSearchText, filterTables, setFilterTables }}
+      value={{
+        searchText,
+        setSearchText,
+        filterTables,
+        setFilterTables,
+        filterLaboratory,
+        setFilterLaboratory
+      }}
     >
       {children}
     </SearchContext.Provider>

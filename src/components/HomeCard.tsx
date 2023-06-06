@@ -7,6 +7,7 @@ const HomeCard = ({ term }: { term: TermType }) => {
     <li className="w-full rounded-md bg-white shadow-lg overflow-hidden">
       <Link
         href={`${term.tabela}/${term.codigo_tuss}`}
+        prefetch={false}
         className="w-full px-5 py-2 gap-4 grid grid-cols-1 lg:grid-cols-[1fr_2fr] 2xl:grid-cols-[1fr_3fr_1fr_1fr_1fr]"
       >
         <div className="flex flex-col">

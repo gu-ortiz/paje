@@ -6,9 +6,15 @@ import { useContext } from 'react';
 import { FilterKeysType } from 'types/search';
 import { getTable } from 'utils/tuss';
 import FilterCheckbox from './FilterCheckbox';
+import FilterSelect from './FilterSelect';
 
 const Filter = () => {
-  const { filterTables, setFilterTables } = useContext(SearchContext);
+  const {
+    filterTables,
+    setFilterTables,
+    filterLaboratory,
+    setFilterLaboratory
+  } = useContext(SearchContext);
 
   const handleCheckboxChange = (filterName: FilterKeysType) => {
     setFilterTables({
@@ -30,8 +36,26 @@ const Filter = () => {
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Panel className="px-4 py-2 text-sm text-gray-800">
-              oi
+            <Disclosure.Panel>
+              <FilterSelect
+                label="Laboratórios"
+                selected={filterLaboratory}
+                setSelected={setFilterLaboratory}
+                options={[
+                  {
+                    id: 0,
+                    value: 'Laboratório 1'
+                  },
+                  {
+                    id: 1,
+                    value: 'Laboratório 2'
+                  },
+                  {
+                    id: 2,
+                    value: 'Laboratório 3'
+                  }
+                ]}
+              />
             </Disclosure.Panel>
             <Disclosure.Button className="w-full flex justify-center items-center bg-transparent px-4 py-2 focus:outline-none">
               <ChevronDownIcon

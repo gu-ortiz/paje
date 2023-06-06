@@ -14,7 +14,7 @@ const FilterCheckbox = ({
     <div className="flex items-center gap-2 cursor-pointer" onClick={onChange}>
       <div
         className={classNames(
-          'w-4 h-4 border rounded-sm flex justify-center items-center',
+          'w-4 h-4 flex justify-center items-center border rounded-sm shadow-sm',
           checked
             ? 'bg-gray-800 border-gray-800'
             : 'bg-transparent border-gray-800'
