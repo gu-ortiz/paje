@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { ResponseListType, ResponseTermType, ResponseType } from 'types/api';
 
 export async function getTerms(url: string): Promise<ResponseListType> {
-  const response = await fetch(url, { next: { revalidate: 0 } });
+  const response = await fetch(url, { next: { revalidate: 600 } });
 
   if (!response.ok)
     return {

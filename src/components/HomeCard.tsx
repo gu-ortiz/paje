@@ -3,8 +3,9 @@ import { TermType } from 'types/term';
 import { formatDate } from 'utils/date';
 
 const HomeCard = ({ term }: { term: TermType }) => {
+  console.log(term);
   return (
-    <li className="w-full rounded-md bg-white shadow-lg overflow-hidden">
+    <li className="w-full rounded-md bg-white shadow-lg overflow-hidden text-gray-800">
       <Link
         href={`${term.tabela}/${term.codigo_tuss}`}
         prefetch={false}

@@ -3,8 +3,8 @@ export type SearchContextType = {
   setSearchText: (value: string) => void;
   filterTables: Record<FilterKeysType, boolean>;
   setFilterTables: (value: Record<FilterKeysType, boolean>) => void;
-  filterLaboratory: SelectOptionType;
-  setFilterLaboratory: (value: SelectOptionType) => void;
+  filterLaboratory: SelectOptionType[];
+  setFilterLaboratory: (value: SelectOptionType[]) => void;
 };
 
 export type FilterKeysType = '18' | '19' | '20' | '22' | 'demaisTerminologias';

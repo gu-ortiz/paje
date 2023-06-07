@@ -3,7 +3,7 @@ import HomeList from 'components/HomeList';
 import SkeletonFilter from 'components/SkeletonFilter';
 import { Suspense } from 'react';
 
-export default async function Page() {
+export default function Page() {
   return (
     <div className="w-full h-full flex gap-5">
       <div className="w-64 sticky top-0 hidden sm:block py-4 self-start">

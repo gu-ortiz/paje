@@ -40,7 +40,7 @@ const HeaderSearch = () => {
         <input
           type="text"
           className={classNames(
-            'w-full h-10 pl-5 pr-0 py-2 rounded-l-lg focus:outline-none',
+            'w-full h-10 pl-5 pr-0 py-2 rounded-l-lg focus:outline-none peer',
             'text-zinc-300 bg-white placeholder:text-zinc-300 focus:text-gray-800'
           )}
           placeholder="Pesquisar..."
@@ -53,8 +53,8 @@ const HeaderSearch = () => {
           onClick={handleClick}
           className={classNames(
             'relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg',
-            'text-gray-800 bg-white focus:outline-none',
-            'hover:text-gray-700 active:text-zinc-300'
+            'text-zinc-300 bg-white focus:outline-none',
+            'peer-focus:text-gray-800 hover:text-gray-800 active:text-gray-600'
           )}
         >
           <MagnifyingGlassIcon className="block h-5 w-5" aria-hidden="true" />

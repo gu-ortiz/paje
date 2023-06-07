@@ -1,6 +1,10 @@
 'use client';
 import { ReactNode, createContext, useState } from 'react';
-import { FilterKeysType, SearchContextType } from 'types/search';
+import {
+  FilterKeysType,
+  SearchContextType,
+  SelectOptionType
+} from 'types/search';
 
 const initialCheckboxState = {
   '18': false,
@@ -10,10 +14,7 @@ const initialCheckboxState = {
   demaisTerminologias: false
 };
 
-const initialSelectState = {
-  id: 0,
-  value: ''
-};
+const initialSelectState: SelectOptionType[] = [];
 
 const initialContext = {
   searchText: '',

@@ -28,7 +28,7 @@ const TermField = ({ text }: { text: string }) => {
       <button
         onClick={handleClick}
         disabled={copied}
-        className="relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg text-zinc-300 bg-white active:hover:text-zinc-300 focus:outline-none hover:text-gray-800"
+        className="relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg text-zinc-300 bg-white active:hover:text-gray-600 focus:outline-none hover:text-gray-800"
       >
         {copied ? (
           <ClipboardDocumentCheckIcon

@@ -73,6 +73,7 @@ const HomeList = () => {
         setLoading(false);
       }
     };
+
     fetchData();
   }, [nextPageUrl, loading, status.error]);
 

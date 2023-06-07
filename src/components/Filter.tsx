@@ -53,6 +53,42 @@ const Filter = () => {
                   {
                     id: 2,
                     value: 'Laboratório 3'
+                  },
+                  {
+                    id: 3,
+                    value: 'Laboratório 4'
+                  },
+                  {
+                    id: 4,
+                    value: 'Laboratório 5'
+                  },
+                  {
+                    id: 5,
+                    value: 'Laboratório 6'
+                  },
+                  {
+                    id: 6,
+                    value: 'Laboratório 7'
+                  },
+                  {
+                    id: 7,
+                    value: 'Laboratório 8'
+                  },
+                  {
+                    id: 8,
+                    value: 'Laboratório 9'
+                  },
+                  {
+                    id: 9,
+                    value: 'Laboratório 10'
+                  },
+                  {
+                    id: 10,
+                    value: 'Laboratório 11'
+                  },
+                  {
+                    id: 11,
+                    value: 'Laboratório 12'
                   }
                 ]}
               />
@@ -61,7 +97,7 @@ const Filter = () => {
               <ChevronDownIcon
                 className={`${
                   open ? 'rotate-180 transform' : ''
-                } h-5 w-5 text-gray-800 flex-shrink-0`}
+                } h-5 w-5 text-gray-800 active:text-gray-600 flex-shrink-0`}
               />
             </Disclosure.Button>
           </>
