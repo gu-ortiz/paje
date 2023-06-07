@@ -1,8 +1,10 @@
 'use client';
 import { Disclosure, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Fragment } from 'react';
+import { Fragment, Suspense } from 'react';
+import Filter from './Filter';
 import HeaderSearch from './HeaderSearch';
+import SkeletonFilter from './SkeletonFilter';
 
 const HeaderPanel = () => {
   return (
@@ -28,9 +30,14 @@ const HeaderPanel = () => {
             leaveTo="transform -translate-x-full opacity-0"
           >
             <Disclosure.Panel className="absolute inset-x-0 top-24 z-10 w-full sm:hidden bg-gray-800">
-              <div className="w-full flex flex-col justify-center items-center space-y-1 px-4 sm:px-6 lg:px-8 py-2">
+              <div className="w-full flex flex-col justify-center items-center gap-3 px-4 sm:px-6 lg:px-8 py-3">
                 <div className="w-full flex items-center justify-between">
                   <HeaderSearch />
+                </div>
+                <div className="w-full h-fit p-4 pb-0 rounded-md bg-white shadow-lg focus:outline-none">
+                  <Suspense fallback={<SkeletonFilter />}>
+                    <Filter />
+                  </Suspense>
                 </div>
               </div>
             </Disclosure.Panel>
