@@ -1,6 +1,7 @@
 'use client';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { SearchContext } from 'context/Search';
+import { useRouter } from 'next/navigation';
 import {
   ChangeEvent,
   KeyboardEvent,
@@ -11,11 +12,13 @@ import {
 import { classNames } from 'utils/classnames';
 
 const HeaderSearch = () => {
+  const router = useRouter();
   const [text, setText] = useState('');
   const { setSearchText } = useContext(SearchContext);
 
   const handleSearch = () => {
     setSearchText(text);
+    router.push('/');
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 export const metadata = {
-  title: 'Ajuda',
+  title: 'Pajé',
   description:
     'Descubra o universo da saúde suplementar com a sabedoria de um pajé'
 };

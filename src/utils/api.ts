@@ -2,29 +2,6 @@
 import { notFound } from 'next/navigation';
 import { ResponseListType, ResponseTermType, ResponseType } from 'types/api';
 
-export async function getTerms(url: string): Promise<ResponseListType> {
-  const response = await fetch(url, { next: { revalidate: 600 } });
-
-  if (!response.ok)
-    return {
-      status: response.status,
-      statusText: response.statusText,
-      error: true,
-      body: {
-        next: null,
-        previous: null,
-        results: []
-      }
-    };
-
-  return {
-    status: response.status,
-    statusText: response.statusText,
-    error: false,
-    body: await response.json()
-  };
-}
-
 export async function getTerm(url: string): Promise<ResponseTermType> {
   const response = await fetch(url, { next: { revalidate: 600 } });
 
@@ -54,5 +31,28 @@ export async function getTerm(url: string): Promise<ResponseTermType> {
     statusText: response.statusText,
     error: false,
     body: data.results[0]
+  };
+}
+
+export async function getTerms(url: string): Promise<ResponseListType> {
+  const response = await fetch(url, { next: { revalidate: 600 } });
+
+  if (!response.ok)
+    return {
+      status: response.status,
+      statusText: response.statusText,
+      error: true,
+      body: {
+        next: null,
+        previous: null,
+        results: []
+      }
+    };
+
+  return {
+    status: response.status,
+    statusText: response.statusText,
+    error: false,
+    body: await response.json()
   };
 }

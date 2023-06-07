@@ -13,15 +13,9 @@ const TermPanel = ({ term }: { term: TermType }) => {
       codigo_tuss: term.codigo_tuss,
       termo: term.termo,
       tabela: term.tabela,
-      dt_inicio_vigencia: term.dt_inicio_vigencia
-        ? formatDate(term.dt_inicio_vigencia)
-        : '',
-      dt_fim_vigencia: term.dt_fim_vigencia
-        ? formatDate(term.dt_fim_vigencia)
-        : '',
-      dt_implantacao: term.dt_implantacao
-        ? formatDate(term.dt_implantacao)
-        : '',
+      dt_inicio_vigencia: formatDate(term.dt_inicio_vigencia),
+      dt_fim_vigencia: formatDate(term.dt_fim_vigencia),
+      dt_implantacao: formatDate(term.dt_implantacao),
       extra_fields: term.extra_fields || {}
     },
     Anvisa: term.anvisa || {}
