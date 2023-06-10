@@ -84,7 +84,7 @@ const FilterSelect = ({
             <Combobox.Options
               className={classNames(
                 'absolute w-[calc(100%-2px)] max-h-60 z-10 mt-1 mx-px origin-top-right rounded-md overflow-y-auto',
-                'text-base bg-white shadow-lg sm:text-sm focus:outline-none',
+                'text-base bg-white shadow-md sm:text-sm focus:outline-none',
                 'sm:scrollbar-thin sm:scrollbar-thumb-gray-800 sm:scrollbar-thumb-rounded-md sm:scrollbar-track-transparent'
               )}
             >

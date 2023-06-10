@@ -1,12 +1,12 @@
 'use client';
 import { ReactNode, createContext, useState } from 'react';
 import {
-  FilterKeysType,
-  SearchContextType,
-  SelectOptionType
+  FilterFieldKeysType,
+  FilterTableKeysType,
+  SearchContextType
 } from 'types/search';
 
-const initialCheckboxState = {
+const initialTablesState = {
   '18': false,
   '19': false,
   '20': false,
@@ -14,20 +14,28 @@ const initialCheckboxState = {
   demaisTerminologias: false
 };
 
-const initialSelectState: SelectOptionType[] = [];
+const initialFieldsState = {
+  termo: false,
+  laboratorio: false,
+  modelo: false,
+  fabricante: false,
+  codigo_anvisa: false,
+  nome_tecnico: false,
+  apresentacao: false
+};
 
 const initialContext = {
   searchText: '',
   setSearchText: () => {
     throw new Error('setSearchTerm was called without being initialized');
   },
-  filterTables: initialCheckboxState,
+  filterTables: initialTablesState,
   setFilterTables: () => {
     throw new Error('setFilterTables was called without being initialized');
   },
-  filterLaboratory: initialSelectState,
-  setFilterLaboratory: () => {
-    throw new Error('setFilterLaboratory was called without being initialized');
+  filterFields: initialFieldsState,
+  setFilterFields: () => {
+    throw new Error('setFilterFields was called without being initialized');
   }
 };
 
@@ -36,8 +44,9 @@ export const SearchContext = createContext<SearchContextType>(initialContext);
 export const SearchProvider = ({ children }: { children: ReactNode }) => {
   const [searchText, setSearchText] = useState(initialContext.searchText);
   const [filterTables, setFilterTables] =
-    useState<Record<FilterKeysType, boolean>>(initialCheckboxState);
-  const [filterLaboratory, setFilterLaboratory] = useState(initialSelectState);
+    useState<Record<FilterTableKeysType, boolean>>(initialTablesState);
+  const [filterFields, setFilterFields] =
+    useState<Record<FilterFieldKeysType, boolean>>(initialFieldsState);
 
   return (
     <SearchContext.Provider
@@ -46,8 +55,8 @@ export const SearchProvider = ({ children }: { children: ReactNode }) => {
         setSearchText,
         filterTables,
         setFilterTables,
-        filterLaboratory,
-        setFilterLaboratory
+        filterFields,
+        setFilterFields
       }}
     >
       {children}

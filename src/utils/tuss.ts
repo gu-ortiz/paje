@@ -1,4 +1,4 @@
-export function getTable(id: string | number) {
+export function getTableLabel(id: string | number) {
   switch (id) {
     case '18' || 18:
       return 'Diárias e Taxas';

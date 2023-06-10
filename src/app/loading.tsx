@@ -5,7 +5,7 @@ export default function Loading() {
   return (
     <div className="w-full h-full flex gap-5">
       <div className="w-64 sticky top-0 hidden sm:block py-4 self-start">
-        <div className="w-full h-fit p-4 pb-0 rounded-md bg-white shadow-lg overflow-hidden focus:outline-none">
+        <div className="w-full h-fit p-4 pb-0 rounded-md bg-white shadow-md overflow-hidden focus:outline-none">
           <SkeletonFilter />
         </div>
       </div>

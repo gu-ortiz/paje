@@ -34,7 +34,7 @@ const HeaderPanel = () => {
                 <div className="w-full flex items-center justify-between">
                   <HeaderSearch />
                 </div>
-                <div className="w-full h-fit p-4 pb-0 rounded-md bg-white shadow-lg focus:outline-none">
+                <div className="w-full h-fit p-4 pb-0 rounded-md bg-white shadow-md focus:outline-none">
                   <Suspense fallback={<SkeletonFilter />}>
                     <Filter />
                   </Suspense>

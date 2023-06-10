@@ -1,8 +1,13 @@
 'use server';
 import { notFound } from 'next/navigation';
-import { ResponseListType, ResponseTermType, ResponseType } from 'types/api';
+import {
+  InternalResponseListType,
+  InternalResponseRecommendationsType,
+  InternalResponseTermType,
+  ResponseTermsType
+} from 'types/api';
 
-export async function getTerm(url: string): Promise<ResponseTermType> {
+export async function getTerm(url: string): Promise<InternalResponseTermType> {
   const response = await fetch(url, { next: { revalidate: 600 } });
 
   if (response.status === 404) notFound();
@@ -24,7 +29,7 @@ export async function getTerm(url: string): Promise<ResponseTermType> {
       }
     };
 
-  const data: ResponseType = await response.json();
+  const data: ResponseTermsType = await response.json();
 
   return {
     status: response.status,
@@ -34,8 +39,33 @@ export async function getTerm(url: string): Promise<ResponseTermType> {
   };
 }
 
-export async function getTerms(url: string): Promise<ResponseListType> {
+export async function getTerms(url: string): Promise<InternalResponseListType> {
   const response = await fetch(url, { next: { revalidate: 600 } });
+
+  if (!response.ok)
+    return {
+      status: response.status,
+      statusText: response.statusText,
+      error: true,
+      body: {
+        next: null,
+        previous: null,
+        results: []
+      }
+    };
+
+  return {
+    status: response.status,
+    statusText: response.statusText,
+    error: false,
+    body: await response.json()
+  };
+}
+
+export async function getRecommendations(
+  url: string
+): Promise<InternalResponseRecommendationsType> {
+  const response = await fetch(url, { next: { revalidate: 30 } });
 
   if (!response.ok)
     return {

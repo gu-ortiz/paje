@@ -1,4 +1,4 @@
-import { FilterKeysType } from 'types/search';
+import { FilterFieldKeysType, FilterTableKeysType } from 'types/search';
 
 export function isValidURL(url: string) {
   try {
@@ -9,16 +9,30 @@ export function isValidURL(url: string) {
   }
 }
 
-export function getSearchParam(query: string) {
+export function getQueryParam(query: string) {
   return query ? `&query=${query}` : '';
 }
 
-export function getTablesParam(filterTables: Record<FilterKeysType, boolean>) {
+export function getFieldsParam(
+  filterFields: Record<FilterFieldKeysType, boolean>
+) {
+  const activeFilters = Object.entries(filterFields)
+    .filter(([, value]) => value)
+    .map(([key]) => key);
+
+  const fields = activeFilters.join(',');
+
+  return fields ? `&fields=${fields}` : '';
+}
+
+export function getTablesParam(
+  filterTables: Record<FilterTableKeysType, boolean>
+) {
   const activeFilters = Object.entries(filterTables)
     .filter(([, value]) => value)
     .map(([key]) => key);
 
   const tables = activeFilters.join(',');
 
-  return tables ? `&tabela=${tables}` : '';
+  return tables ? `&tabelas=${tables}` : '';
 }

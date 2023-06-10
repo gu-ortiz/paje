@@ -3,95 +3,56 @@ import { Disclosure } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { SearchContext } from 'context/Search';
 import { useContext } from 'react';
-import { FilterKeysType } from 'types/search';
-import { getTable } from 'utils/tuss';
+import { FilterFieldKeysType, FilterTableKeysType } from 'types/search';
+import { getTableLabel, getTermLabel } from 'utils/tuss';
 import FilterCheckbox from './FilterCheckbox';
-import FilterSelect from './FilterSelect';
 
 const Filter = () => {
-  const {
-    filterTables,
-    setFilterTables,
-    filterLaboratory,
-    setFilterLaboratory
-  } = useContext(SearchContext);
+  const { filterTables, setFilterTables, filterFields, setFilterFields } =
+    useContext(SearchContext);
 
-  const handleCheckboxChange = (filterName: FilterKeysType) => {
+  const handleTablesChange = (filterName: FilterTableKeysType) => {
     setFilterTables({
       ...filterTables,
       [filterName]: !filterTables[filterName]
     });
   };
 
+  const handleFieldsChange = (filterName: FilterFieldKeysType) => {
+    setFilterFields({
+      ...filterFields,
+      [filterName]: !filterFields[filterName]
+    });
+  };
+
   return (
-    <div className="w-full h-fit flex flex-col gap-3 bg-transparent">
-      {Object.keys(filterTables).map((table, i) => (
-        <FilterCheckbox
-          key={i}
-          label={getTable(table)}
-          checked={filterTables[table as FilterKeysType]}
-          onChange={() => handleCheckboxChange(table as FilterKeysType)}
-        />
-      ))}
+    <div className="w-full h-fit flex flex-col gap-3">
+      <div className="w-full flex flex-col gap-2">
+        <label className="text-gray-800 text-xs font-bold">Tabelas</label>
+        {Object.keys(filterTables).map((table, i) => (
+          <FilterCheckbox
+            key={i}
+            label={getTableLabel(table)}
+            checked={filterTables[table as FilterTableKeysType]}
+            onChange={() => handleTablesChange(table as FilterTableKeysType)}
+          />
+        ))}
+      </div>
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Panel>
-              <FilterSelect
-                label="Laboratórios"
-                selected={filterLaboratory}
-                setSelected={setFilterLaboratory}
-                options={[
-                  {
-                    id: 0,
-                    value: 'Laboratório 1'
-                  },
-                  {
-                    id: 1,
-                    value: 'Laboratório 2'
-                  },
-                  {
-                    id: 2,
-                    value: 'Laboratório 3'
-                  },
-                  {
-                    id: 3,
-                    value: 'Laboratório 4'
-                  },
-                  {
-                    id: 4,
-                    value: 'Laboratório 5'
-                  },
-                  {
-                    id: 5,
-                    value: 'Laboratório 6'
-                  },
-                  {
-                    id: 6,
-                    value: 'Laboratório 7'
-                  },
-                  {
-                    id: 7,
-                    value: 'Laboratório 8'
-                  },
-                  {
-                    id: 8,
-                    value: 'Laboratório 9'
-                  },
-                  {
-                    id: 9,
-                    value: 'Laboratório 10'
-                  },
-                  {
-                    id: 10,
-                    value: 'Laboratório 11'
-                  },
-                  {
-                    id: 11,
-                    value: 'Laboratório 12'
+            <Disclosure.Panel className="w-full flex flex-col gap-2">
+              <label className="text-gray-800 text-xs font-bold">Campos</label>
+              {Object.keys(filterFields).map((field, i) => (
+                <FilterCheckbox
+                  key={i}
+                  label={getTermLabel(field)}
+                  checked={filterFields[field as FilterFieldKeysType]}
+                  onChange={() =>
+                    handleFieldsChange(field as FilterFieldKeysType)
                   }
-                ]}
-              />
+                />
+              ))}
             </Disclosure.Panel>
             <Disclosure.Button className="w-full flex justify-center items-center bg-transparent px-4 py-2 focus:outline-none">
               <ChevronDownIcon

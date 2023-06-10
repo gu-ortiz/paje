@@ -5,7 +5,7 @@ import { SearchContext } from 'context/Search';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { TermType } from 'types/term';
 import { getTerms } from 'utils/api';
-import { getSearchParam, getTablesParam, isValidURL } from 'utils/url';
+import { getQueryParam, getTablesParam, isValidURL } from 'utils/url';
 
 const HomeList = () => {
   const { searchText, filterTables } = useContext(SearchContext);
@@ -54,7 +54,7 @@ const HomeList = () => {
       setNextPageUrl(
         `${process.env.NEXT_PUBLIC_API_URL}/search/?page=1${getTablesParam(
           filterTables
-        )}${getSearchParam(searchText)}`
+        )}${getQueryParam(searchText)}`
       );
   }, [searchText, filterTables]);
 

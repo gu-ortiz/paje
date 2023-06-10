@@ -46,7 +46,7 @@ const TermPanel = ({ term }: { term: TermType }) => {
       <Tab.Panels
         className={classNames(
           'w-full h-fit p-4 sm:p-6 lg:p-8 text-white',
-          'rounded-b-md lg:rounded-tr-md bg-gray-800 shadow-lg overflow-hidden'
+          'rounded-b-md lg:rounded-tr-md bg-gray-800 shadow-md overflow-hidden'
         )}
       >
         {Object.values(options).map((info, idx) => (

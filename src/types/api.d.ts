@@ -1,21 +1,34 @@
 import { TermType } from './term';
 
-export type ResponseType = {
+export type ResponseTermsType = {
   previous: string | null;
   next: string | null;
   results: TermType[];
 };
 
-export type ResponseListType = {
+export type ResponseRecommendationsType = {
+  previous: string | null;
+  next: string | null;
+  results: string[];
+};
+
+export type InternalResponseListType = {
   status: number;
   statusText: string;
   error: boolean;
-  body: ResponseType;
+  body: ResponseTermsType;
 };
 
-export type ResponseTermType = {
+export type InternalResponseTermType = {
   status: number;
   statusText: string;
   error: boolean;
   body: TermType;
+};
+
+export type InternalResponseRecommendationsType = {
+  status: number;
+  statusText: string;
+  error: boolean;
+  body: ResponseRecommendationsType;
 };

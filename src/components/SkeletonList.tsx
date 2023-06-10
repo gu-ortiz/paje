@@ -4,7 +4,7 @@ const SkeletonList = () => {
       {[...Array(4)].map((_, i) => (
         <div
           key={i}
-          className="w-full px-5 py-3 rounded-md bg-white shadow-lg overflow-hidden"
+          className="w-full px-5 py-3 rounded-md bg-white shadow-md overflow-hidden"
         >
           <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-[1fr_2fr] 2xl:grid-cols-[1fr_3fr_1fr_1fr_1fr]">
             <div className="flex flex-col gap-2">

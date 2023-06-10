@@ -64,7 +64,7 @@ export default async function Page() {
   ];
 
   return (
-    <div className="w-full flex flex-col rounded-2xl bg-white shadow-lg p-2 gap-2">
+    <div className="w-full flex flex-col rounded-2xl bg-white shadow-md p-2 gap-2">
       {qaList.map((qa, i) => (
         <Disclosure key={i}>
           {({ open }) => (

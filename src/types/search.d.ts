@@ -1,13 +1,27 @@
 export type SearchContextType = {
   searchText: string;
   setSearchText: (value: string) => void;
-  filterTables: Record<FilterKeysType, boolean>;
-  setFilterTables: (value: Record<FilterKeysType, boolean>) => void;
-  filterLaboratory: SelectOptionType[];
-  setFilterLaboratory: (value: SelectOptionType[]) => void;
+  filterTables: Record<FilterTableKeysType, boolean>;
+  setFilterTables: (value: Record<FilterTableKeysType, boolean>) => void;
+  filterFields: Record<FilterFieldKeysType, boolean>;
+  setFilterFields: (value: Record<FilterFieldKeysType, boolean>) => void;
 };
 
-export type FilterKeysType = '18' | '19' | '20' | '22' | 'demaisTerminologias';
+export type FilterTableKeysType =
+  | '18'
+  | '19'
+  | '20'
+  | '22'
+  | 'demaisTerminologias';
+
+export type FilterFieldKeysType =
+  | 'termo'
+  | 'laboratorio'
+  | 'modelo'
+  | 'fabricante'
+  | 'codigo_anvisa'
+  | 'nome_tecnico'
+  | 'apresentacao';
 
 export type SelectOptionType = {
   id: number;
