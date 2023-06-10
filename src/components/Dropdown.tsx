@@ -1,35 +1,54 @@
 import { Transition } from '@headlessui/react';
-import { ClockIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import {
+  ClockIcon,
+  MagnifyingGlassIcon,
+  XMarkIcon
+} from '@heroicons/react/24/outline';
 import { MouseEvent } from 'react';
 import { classNames } from 'utils/classnames';
 
 const Dropdown = ({
   showDropdown,
   recomendations,
+  previousSearches,
   handleSearchClick,
-  handleRecomendationClick
+  handleRecomendationClick,
+  handleDeletePreviousSearch
 }: {
   showDropdown: boolean;
   recomendations: string[];
+  previousSearches: string[];
   handleSearchClick: (e: MouseEvent<HTMLButtonElement>) => void;
   handleRecomendationClick: (recomendation: string) => void;
+  handleDeletePreviousSearch: (recomendation: string) => void;
 }) => {
+  console.log(previousSearches);
   return (
     <Transition show={showDropdown} className="w-full flex flex-col pt-1">
-      {recomendations.length > 0 &&
-        recomendations.map((recomendation) => (
-          <button
-            key={recomendation}
-            onClick={() => handleRecomendationClick(recomendation)}
+      {previousSearches.length > 0 &&
+        previousSearches.map((search) => (
+          <div
+            key={search}
             className={classNames(
-              'w-full flex justify-start items-center px-4 py-px focus:outline-none',
+              'w-full flex justify-start items-center px-4 py-px',
               'text-gray-800 bg-transparent',
               'hover:text-white hover:bg-gray-800'
             )}
           >
-            <ClockIcon className="w-4 h-4 mr-2" />
-            {recomendation}
-          </button>
+            <button
+              onClick={() => handleRecomendationClick(search)}
+              className="w-full flex justify-start items-center focus:outline-none"
+            >
+              <ClockIcon className="block w-4 h-4 mr-2" />
+              {search}
+            </button>
+            <button
+              onClick={() => handleDeletePreviousSearch(search)}
+              className="flex justify-start items-center text-white focus:outline-none"
+            >
+              <XMarkIcon className="block w-4 h-4" />
+            </button>
+          </div>
         ))}
       {recomendations.length > 0 &&
         recomendations.map((recomendation) => (
@@ -42,7 +61,7 @@ const Dropdown = ({
               'hover:text-white hover:bg-gray-800'
             )}
           >
-            <MagnifyingGlassIcon className="w-4 h-4 mr-2" />
+            <MagnifyingGlassIcon className="block w-4 h-4 mr-2" />
             {recomendation}
           </button>
         ))}

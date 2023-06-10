@@ -1,5 +1,10 @@
 'use client';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import {
+  deleteSearch,
+  getPreviousSearches,
+  saveSearch
+} from 'cache/localStorage';
 import { SearchContext } from 'context/Search';
 import { useRouter } from 'next/navigation';
 import {
@@ -8,6 +13,7 @@ import {
   MouseEvent,
   useContext,
   useEffect,
+  useRef,
   useState
 } from 'react';
 import { getRecommendations } from 'utils/api';
@@ -17,22 +23,27 @@ import Dropdown from './Dropdown';
 
 const HeaderSearch = () => {
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [text, setText] = useState('');
-  const [recomendations, setRecomendations] = useState<string[]>([
-    'Mevatyl',
-    'Movielens'
-  ]);
+  const [recomendations, setRecomendations] = useState<string[]>([]);
+  const [previousSearches, setPreviousSearches] = useState<string[]>(
+    getPreviousSearches('')
+  );
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const { setSearchText, filterFields, filterTables } =
     useContext(SearchContext);
-  const showDropdown = !!text;
 
   const handleSearch = () => {
+    saveSearch(text);
     setSearchText(text);
+    setPreviousSearches(getPreviousSearches(text));
     router.push('/');
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
+    setPreviousSearches(getPreviousSearches(e.target.value));
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -45,16 +56,37 @@ const HeaderSearch = () => {
   const handleSearchClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     handleSearch();
+    setDropdownOpen(false);
   };
 
   const handleRecomendationClick = (recomendation: string) => {
     setText(recomendation);
     handleSearch();
+    setDropdownOpen(false);
+  };
+
+  const handleDeletePreviousSearch = (recomendation: string) => {
+    if (previousSearches.length > 0 && recomendations.length > 0)
+      setPreviousSearches(deleteSearch(recomendation));
   };
 
   const handleClear = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setText('');
+    inputRef.current && inputRef.current.focus();
+  };
+
+  const handleInputFocus = () => {
+    setDropdownOpen(true);
+  };
+
+  const handleInputBlur = () => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(document.activeElement)
+    ) {
+      setDropdownOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -80,7 +112,7 @@ const HeaderSearch = () => {
           <div
             className={classNames(
               'w-full flex bg-transparent border-zinc-300',
-              showDropdown ? 'border-b' : 'border-b-0'
+              dropdownOpen ? 'border-b' : 'border-b-0'
             )}
           >
             <input
@@ -92,8 +124,11 @@ const HeaderSearch = () => {
               placeholder="Pesquisar..."
               spellCheck="false"
               value={text}
+              ref={inputRef}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
             />
             <button
               onClick={handleClear}
@@ -114,12 +149,16 @@ const HeaderSearch = () => {
               )}
             </button>
           </div>
-          <Dropdown
-            showDropdown={showDropdown}
-            recomendations={recomendations}
-            handleSearchClick={handleSearchClick}
-            handleRecomendationClick={handleRecomendationClick}
-          />
+          <div ref={dropdownRef}>
+            <Dropdown
+              showDropdown={dropdownOpen}
+              recomendations={recomendations}
+              previousSearches={previousSearches}
+              handleSearchClick={handleSearchClick}
+              handleRecomendationClick={handleRecomendationClick}
+              handleDeletePreviousSearch={handleDeletePreviousSearch}
+            />
+          </div>
         </div>
       </div>
     </div>
