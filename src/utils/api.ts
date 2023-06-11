@@ -4,11 +4,11 @@ import {
   InternalResponseListType,
   InternalResponseRecommendationsType,
   InternalResponseTermType,
-  ResponseTermsType
+  ResponseRecommendationsType
 } from 'types/api';
 
 export async function getTerm(url: string): Promise<InternalResponseTermType> {
-  const response = await fetch(url, { next: { revalidate: 600 } });
+  const response = await fetch(url, { next: { revalidate: 0 } });
 
   if (response.status === 404) notFound();
 
@@ -18,6 +18,7 @@ export async function getTerm(url: string): Promise<InternalResponseTermType> {
       statusText: response.statusText,
       error: true,
       body: {
+        id: 0,
         codigo_tuss: '',
         termo: '',
         tabela: 0,
@@ -25,22 +26,20 @@ export async function getTerm(url: string): Promise<InternalResponseTermType> {
         dt_fim_vigencia: '',
         dt_implantacao: '',
         extra_fields: null,
-        anvisa: null
+        anvisa_fields: null
       }
     };
-
-  const data: ResponseTermsType = await response.json();
 
   return {
     status: response.status,
     statusText: response.statusText,
     error: false,
-    body: data.results[0]
+    body: await response.json()
   };
 }
 
 export async function getTerms(url: string): Promise<InternalResponseListType> {
-  const response = await fetch(url, { next: { revalidate: 600 } });
+  const response = await fetch(url, { next: { revalidate: 0 } });
 
   if (!response.ok)
     return {
@@ -65,7 +64,7 @@ export async function getTerms(url: string): Promise<InternalResponseListType> {
 export async function getRecommendations(
   url: string
 ): Promise<InternalResponseRecommendationsType> {
-  const response = await fetch(url, { next: { revalidate: 30 } });
+  const response = await fetch(url, { next: { revalidate: 0 } });
 
   if (!response.ok)
     return {
@@ -79,10 +78,19 @@ export async function getRecommendations(
       }
     };
 
+  const data: ResponseRecommendationsType = await response.json();
+
+  // data.results = data.results
+  //   .filter(
+  //     (item, index, self) =>
+  //       index === self.findIndex((t) => t.match === item.match)
+  //   )
+  //   .slice(0, 10);
+
   return {
     status: response.status,
     statusText: response.statusText,
     error: false,
-    body: await response.json()
+    body: data
   };
 }

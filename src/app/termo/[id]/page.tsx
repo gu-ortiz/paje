@@ -2,12 +2,12 @@ import TermPanel from 'components/TermPanel';
 import { getTerm } from 'utils/api';
 
 export default async function Page({
-  params: { table, id }
+  params: { id }
 }: {
-  params: { table: string; id: string };
+  params: { id: string };
 }) {
   const data = await getTerm(
-    `${process.env.NEXT_PUBLIC_API_URL}/termos_tuss/?tabela=${table}&codigo_tuss=${id}`
+    `${process.env.NEXT_PUBLIC_API_URL}/termos_tuss/${id}/`
   );
 
   if (data.error) {

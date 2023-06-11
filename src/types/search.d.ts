@@ -15,6 +15,7 @@ export type FilterTableKeysType =
   | 'demaisTerminologias';
 
 export type FilterFieldKeysType =
+  | 'codigo_tuss'
   | 'termo'
   | 'laboratorio'
   | 'modelo'

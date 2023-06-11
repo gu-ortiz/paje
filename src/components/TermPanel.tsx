@@ -18,7 +18,7 @@ const TermPanel = ({ term }: { term: TermType }) => {
       dt_implantacao: formatDate(term.dt_implantacao),
       extra_fields: term.extra_fields || {}
     },
-    Anvisa: term.anvisa || {}
+    Anvisa: term.anvisa_fields || {}
   });
 
   return (
@@ -26,7 +26,8 @@ const TermPanel = ({ term }: { term: TermType }) => {
       <Tab.List className="w-full lg:w-1/2 flex rounded-t-md bg-white">
         {Object.keys(options).map(
           (option) =>
-            Object.keys(options[option as keyof typeof options]).length > 0 && (
+            Object.keys(options[option as keyof typeof options]).length >=
+              0 && (
               <Tab
                 key={option}
                 className={({ selected }) =>
@@ -49,36 +50,36 @@ const TermPanel = ({ term }: { term: TermType }) => {
           'rounded-b-md lg:rounded-tr-md bg-gray-800 shadow-md overflow-hidden'
         )}
       >
-        {Object.values(options).map((info, idx) => (
-          <Tab.Panel
-            key={idx}
-            className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
-          >
-            {Object.keys(info)
-              .filter((i) => i !== 'extra_fields')
-              .map((label) => (
-                <TermLabel
-                  key={label}
-                  label={getTermLabel(label)}
-                  text={String(info[label as keyof typeof info])}
-                />
-              ))}
-            {info.extra_fields &&
-              typeof info.extra_fields === 'object' &&
-              Object.keys(info.extra_fields).map((label) => {
-                const extraFields = info.extra_fields as {
-                  [key: string]: string;
-                };
-                return (
+        {Object.values(options).map((info, idx) => {
+          const extraFields = info.extra_fields as {
+            [key: string]: string;
+          };
+          return (
+            <Tab.Panel
+              key={idx}
+              className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
+            >
+              {Object.keys(info)
+                .filter((i) => i !== 'extra_fields')
+                .map((label) => (
                   <TermLabel
                     key={label}
                     label={getTermLabel(label)}
+                    text={String(info[label as keyof typeof info])}
+                  />
+                ))}
+              {extraFields &&
+                typeof info.extra_fields === 'object' &&
+                Object.keys(info.extra_fields).map((label) => (
+                  <TermLabel
+                    key={label}
+                    label={label}
                     text={String(extraFields[label])}
                   />
-                );
-              })}
-          </Tab.Panel>
-        ))}
+                ))}
+            </Tab.Panel>
+          );
+        })}
       </Tab.Panels>
     </Tab.Group>
   );

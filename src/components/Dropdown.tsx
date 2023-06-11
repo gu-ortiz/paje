@@ -56,7 +56,7 @@ const Dropdown = ({
         recomendations.map((recomendation) => (
           <button
             key={recomendation.id}
-            onClick={() => handleRecomendationClick(recomendation.value)}
+            onClick={() => handleRecomendationClick(recomendation.match)}
             className={classNames(
               'w-full flex justify-start items-center px-4 py-px focus:outline-none',
               'text-gray-800 bg-transparent',
@@ -64,7 +64,7 @@ const Dropdown = ({
             )}
           >
             <MagnifyingGlassIcon className="block w-4 h-4 mr-2" />
-            {recomendation.value}
+            {recomendation.match}
           </button>
         ))}
       <div className="w-full flex justify-center items-center px-4 sm:px-6 lg:px-8 py-2">

@@ -23,6 +23,8 @@ import { getFieldsParam, getQueryParam, getTablesParam } from 'utils/url';
 import Dropdown from './Dropdown';
 
 const HeaderSearch = () => {
+  const { searchText, setSearchText, filterFields, filterTables } =
+    useContext(SearchContext);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -34,12 +36,11 @@ const HeaderSearch = () => {
     getPreviousSearches('')
   );
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { setSearchText, filterFields, filterTables } =
-    useContext(SearchContext);
 
-  const handleSearch = () => {
-    saveSearch(text);
-    setSearchText(text);
+  const handleSearch = (searchText?: string) => {
+    const finalSearchText = searchText || text;
+    saveSearch(finalSearchText);
+    setSearchText(finalSearchText);
     setDropdownOpen(false);
     router.push('/');
   };
@@ -62,7 +63,7 @@ const HeaderSearch = () => {
 
   const handleRecomendationClick = (recomendation: string) => {
     setText(recomendation);
-    handleSearch();
+    handleSearch(recomendation);
   };
 
   const handleDeletePreviousSearch = (recomendation: string) => {
@@ -96,6 +97,15 @@ const HeaderSearch = () => {
   }, [text]);
 
   useEffect(() => {
+    setPreviousSearches(getPreviousSearches(text));
+  }, [text]);
+
+  useEffect(() => {
+    setText(searchText);
+  }, [searchText, filterFields, filterTables]);
+
+  useEffect(() => {
+    setRecomendations([]);
     if (text.length > 2) {
       const fetchData = async () => {
         const response = await getRecommendations(
@@ -129,7 +139,7 @@ const HeaderSearch = () => {
             <input
               type="text"
               className={classNames(
-                'w-full h-10 pl-4 pr-0 py-2 rounded-l-lg focus:outline-none peer',
+                'w-full h-10 pl-4 pr-0 py-2 rounded-l-lg focus:outline-none',
                 'text-zinc-300 bg-transparent placeholder:text-zinc-300 focus:text-gray-800'
               )}
               placeholder="Pesquisar..."
@@ -149,7 +159,7 @@ const HeaderSearch = () => {
                 'disabled:text-zinc-300',
                 !text
                   ? 'hover:text-zinc-300 cursor-text'
-                  : 'peer-focus:text-gray-800 hover:text-gray-800 active:text-gray-600'
+                  : 'hover:text-gray-800 active:text-gray-600'
               )}
             >
               {text ? (

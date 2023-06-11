@@ -5,10 +5,15 @@ import { SearchContext } from 'context/Search';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { TermType } from 'types/term';
 import { getTerms } from 'utils/api';
-import { getQueryParam, getTablesParam, isValidURL } from 'utils/url';
+import {
+  getFieldsParam,
+  getQueryParam,
+  getTablesParam,
+  isValidURL
+} from 'utils/url';
 
 const HomeList = () => {
-  const { searchText, filterTables } = useContext(SearchContext);
+  const { searchText, filterFields, filterTables } = useContext(SearchContext);
   const [data, setData] = useState<TermType[]>([]);
   const [nextPageUrl, setNextPageUrl] = useState('');
   const [loading, setLoading] = useState(true);
@@ -54,9 +59,9 @@ const HomeList = () => {
       setNextPageUrl(
         `${process.env.NEXT_PUBLIC_API_URL}/search/?page=1${getTablesParam(
           filterTables
-        )}${getQueryParam(searchText)}`
+        )}${getFieldsParam(filterFields)}${getQueryParam(searchText)}`
       );
-  }, [searchText, filterTables]);
+  }, [searchText, filterFields, filterTables]);
 
   useEffect(() => {
     const fetchData = async () => {
