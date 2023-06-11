@@ -16,6 +16,7 @@ import {
   useRef,
   useState
 } from 'react';
+import { RecommendationType } from 'types/term';
 import { getRecommendations } from 'utils/api';
 import { classNames } from 'utils/classnames';
 import { getFieldsParam, getQueryParam, getTablesParam } from 'utils/url';
@@ -26,7 +27,9 @@ const HeaderSearch = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [text, setText] = useState('');
-  const [recomendations, setRecomendations] = useState<string[]>([]);
+  const [recomendations, setRecomendations] = useState<RecommendationType[]>(
+    []
+  );
   const [previousSearches, setPreviousSearches] = useState<string[]>(
     getPreviousSearches('')
   );
@@ -37,13 +40,12 @@ const HeaderSearch = () => {
   const handleSearch = () => {
     saveSearch(text);
     setSearchText(text);
-    setPreviousSearches(getPreviousSearches(text));
+    setDropdownOpen(false);
     router.push('/');
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
-    setPreviousSearches(getPreviousSearches(e.target.value));
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -56,18 +58,16 @@ const HeaderSearch = () => {
   const handleSearchClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     handleSearch();
-    setDropdownOpen(false);
   };
 
   const handleRecomendationClick = (recomendation: string) => {
     setText(recomendation);
     handleSearch();
-    setDropdownOpen(false);
   };
 
   const handleDeletePreviousSearch = (recomendation: string) => {
-    if (previousSearches.length > 0 && recomendations.length > 0)
-      setPreviousSearches(deleteSearch(recomendation));
+    setPreviousSearches(deleteSearch(recomendation));
+    inputRef.current && inputRef.current.focus();
   };
 
   const handleClear = (e: MouseEvent<HTMLButtonElement>) => {
@@ -81,13 +81,19 @@ const HeaderSearch = () => {
   };
 
   const handleInputBlur = () => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(document.activeElement)
-    ) {
-      setDropdownOpen(false);
-    }
+    setTimeout(() => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(document.activeElement)
+      ) {
+        setDropdownOpen(false);
+      }
+    }, 100);
   };
+
+  useEffect(() => {
+    setPreviousSearches(getPreviousSearches(text));
+  }, [text]);
 
   useEffect(() => {
     if (text.length > 2) {
@@ -97,6 +103,8 @@ const HeaderSearch = () => {
             filterTables
           )}${getFieldsParam(filterFields)}${getQueryParam(text)}`
         );
+
+        console.log(response);
 
         setRecomendations(response.body.results);
       };
@@ -108,7 +116,10 @@ const HeaderSearch = () => {
   return (
     <div className="w-full sm:w-2/3 h-full flex justify-center items-center">
       <div className="relative w-full h-10 flex flex-col items-start">
-        <div className="absolute w-full flex flex-col rounded-lg bg-white shadow-md">
+        <div
+          ref={dropdownRef}
+          className="absolute w-full z-50 flex flex-col rounded-lg bg-white shadow-md"
+        >
           <div
             className={classNames(
               'w-full flex bg-transparent border-zinc-300',
@@ -118,7 +129,7 @@ const HeaderSearch = () => {
             <input
               type="text"
               className={classNames(
-                'w-full h-10 pl-5 pr-0 py-2 rounded-l-lg focus:outline-none peer',
+                'w-full h-10 pl-4 pr-0 py-2 rounded-l-lg focus:outline-none peer',
                 'text-zinc-300 bg-transparent placeholder:text-zinc-300 focus:text-gray-800'
               )}
               placeholder="Pesquisar..."
@@ -132,11 +143,13 @@ const HeaderSearch = () => {
             />
             <button
               onClick={handleClear}
-              disabled={!text}
               className={classNames(
                 'relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg',
-                'text-zinc-300 bg-transparent hover:text-gray-800 focus:outline-none',
-                'peer-focus:text-gray-800 active:text-gray-600'
+                'text-zinc-300 bg-transparent focus:outline-none',
+                'disabled:text-zinc-300',
+                !text
+                  ? 'hover:text-zinc-300 cursor-text'
+                  : 'peer-focus:text-gray-800 hover:text-gray-800 active:text-gray-600'
               )}
             >
               {text ? (
@@ -149,16 +162,15 @@ const HeaderSearch = () => {
               )}
             </button>
           </div>
-          <div ref={dropdownRef}>
-            <Dropdown
-              showDropdown={dropdownOpen}
-              recomendations={recomendations}
-              previousSearches={previousSearches}
-              handleSearchClick={handleSearchClick}
-              handleRecomendationClick={handleRecomendationClick}
-              handleDeletePreviousSearch={handleDeletePreviousSearch}
-            />
-          </div>
+          <Dropdown
+            showDropdown={dropdownOpen}
+            disabledSearch={!text}
+            recomendations={recomendations}
+            previousSearches={previousSearches}
+            handleSearchClick={handleSearchClick}
+            handleRecomendationClick={handleRecomendationClick}
+            handleDeletePreviousSearch={handleDeletePreviousSearch}
+          />
         </div>
       </div>
     </div>

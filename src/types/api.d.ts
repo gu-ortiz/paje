@@ -1,4 +1,4 @@
-import { TermType } from './term';
+import { RecommendationType, TermType } from './term';
 
 export type ResponseTermsType = {
   previous: string | null;
@@ -9,7 +9,7 @@ export type ResponseTermsType = {
 export type ResponseRecommendationsType = {
   previous: string | null;
   next: string | null;
-  results: string[];
+  results: RecommendationType[];
 };
 
 export type InternalResponseListType = {

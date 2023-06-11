@@ -8,3 +8,8 @@ export type TermType = {
   extra_fields: { [key: string]: string } | null;
   anvisa: { [key: string]: string } | null;
 };
+
+export type RecommendationType = {
+  id: number;
+  value: string;
+};

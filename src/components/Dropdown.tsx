@@ -5,10 +5,12 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline';
 import { MouseEvent } from 'react';
+import { RecommendationType } from 'types/term';
 import { classNames } from 'utils/classnames';
 
 const Dropdown = ({
   showDropdown,
+  disabledSearch,
   recomendations,
   previousSearches,
   handleSearchClick,
@@ -16,13 +18,13 @@ const Dropdown = ({
   handleDeletePreviousSearch
 }: {
   showDropdown: boolean;
-  recomendations: string[];
+  disabledSearch: boolean;
+  recomendations: RecommendationType[];
   previousSearches: string[];
   handleSearchClick: (e: MouseEvent<HTMLButtonElement>) => void;
   handleRecomendationClick: (recomendation: string) => void;
   handleDeletePreviousSearch: (recomendation: string) => void;
 }) => {
-  console.log(previousSearches);
   return (
     <Transition show={showDropdown} className="w-full flex flex-col pt-1">
       {previousSearches.length > 0 &&
@@ -53,8 +55,8 @@ const Dropdown = ({
       {recomendations.length > 0 &&
         recomendations.map((recomendation) => (
           <button
-            key={recomendation}
-            onClick={() => handleRecomendationClick(recomendation)}
+            key={recomendation.id}
+            onClick={() => handleRecomendationClick(recomendation.value)}
             className={classNames(
               'w-full flex justify-start items-center px-4 py-px focus:outline-none',
               'text-gray-800 bg-transparent',
@@ -62,16 +64,18 @@ const Dropdown = ({
             )}
           >
             <MagnifyingGlassIcon className="block w-4 h-4 mr-2" />
-            {recomendation}
+            {recomendation.value}
           </button>
         ))}
       <div className="w-full flex justify-center items-center px-4 sm:px-6 lg:px-8 py-2">
         <button
           onClick={handleSearchClick}
+          disabled={disabledSearch}
           className={classNames(
             'w-24 h-9 pr-px flex justify-center items-center rounded-lg',
             'text-white bg-gray-800 focus:outline-none',
-            'peer-focus:text-gray-800 hover:bg-gray-600'
+            'peer-focus:text-gray-800 hover:bg-gray-600',
+            'disabled:bg-zinc-300'
           )}
         >
           Pesquisar
