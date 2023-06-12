@@ -1,20 +1,20 @@
 'use client';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import {
-    deleteSearch,
-    getPreviousSearches,
-    saveSearch
+  deleteSearch,
+  getPreviousSearches,
+  saveSearch
 } from 'cache/localStorage';
 import { SearchContext } from 'context/Search';
 import { useRouter } from 'next/navigation';
 import {
-    ChangeEvent,
-    KeyboardEvent,
-    MouseEvent,
-    useContext,
-    useEffect,
-    useRef,
-    useState
+  ChangeEvent,
+  KeyboardEvent,
+  MouseEvent,
+  useContext,
+  useEffect,
+  useRef,
+  useState
 } from 'react';
 import { RecommendationType } from 'types/tuss';
 import { getRecommendations } from 'utils/api';
@@ -32,9 +32,7 @@ const HeaderSearch = () => {
   const [recomendations, setRecomendations] = useState<RecommendationType[]>(
     []
   );
-  const [previousSearches, setPreviousSearches] = useState<string[]>(
-    getPreviousSearches('')
-  );
+  const [previousSearches, setPreviousSearches] = useState<string[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleSearch = (searchText?: string) => {
@@ -92,10 +90,6 @@ const HeaderSearch = () => {
       }
     }, 100);
   };
-
-  useEffect(() => {
-    setPreviousSearches(getPreviousSearches(text));
-  }, [text]);
 
   useEffect(() => {
     setPreviousSearches(getPreviousSearches(text));

@@ -1,3 +1,4 @@
+'use client';
 export const getPreviousSearches = (input: string) => {
   const searches = localStorage.getItem('searches');
 
