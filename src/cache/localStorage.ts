@@ -7,7 +7,7 @@ export const getPreviousSearches = (input: string) => {
     search.toLowerCase().startsWith(input.toLowerCase())
   );
 
-  return searchesArray.slice(0, 3);
+  return searchesArray.slice(0, 5);
 };
 
 export const saveSearch = (searchText: string) => {

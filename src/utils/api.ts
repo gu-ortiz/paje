@@ -1,14 +1,14 @@
 'use server';
 import { notFound } from 'next/navigation';
 import {
-  InternalResponseListType,
-  InternalResponseRecommendationsType,
-  InternalResponseTermType,
-  ResponseRecommendationsType
+  ResponseRecommendationsType,
+  ResponseTablesType,
+  ResponseTermType,
+  ResponseTermsType
 } from 'types/api';
 
-export async function getTerm(url: string): Promise<InternalResponseTermType> {
-  const response = await fetch(url, { next: { revalidate: 0 } });
+export async function getTerm(url: string): Promise<ResponseTermType> {
+  const response = await fetch(url, { next: { revalidate: 600 } });
 
   if (response.status === 404) notFound();
 
@@ -38,8 +38,8 @@ export async function getTerm(url: string): Promise<InternalResponseTermType> {
   };
 }
 
-export async function getTerms(url: string): Promise<InternalResponseListType> {
-  const response = await fetch(url, { next: { revalidate: 0 } });
+export async function getTerms(url: string): Promise<ResponseTermsType> {
+  const response = await fetch(url, { next: { revalidate: 600 } });
 
   if (!response.ok)
     return {
@@ -47,6 +47,7 @@ export async function getTerms(url: string): Promise<InternalResponseListType> {
       statusText: response.statusText,
       error: true,
       body: {
+        count: 0,
         next: null,
         previous: null,
         results: []
@@ -63,8 +64,8 @@ export async function getTerms(url: string): Promise<InternalResponseListType> {
 
 export async function getRecommendations(
   url: string
-): Promise<InternalResponseRecommendationsType> {
-  const response = await fetch(url, { next: { revalidate: 0 } });
+): Promise<ResponseRecommendationsType> {
+  const response = await fetch(url, { next: { revalidate: 60 } });
 
   if (!response.ok)
     return {
@@ -72,25 +73,41 @@ export async function getRecommendations(
       statusText: response.statusText,
       error: true,
       body: {
+        count: 0,
         next: null,
         previous: null,
         results: []
       }
     };
 
-  const data: ResponseRecommendationsType = await response.json();
+  return {
+    status: response.status,
+    statusText: response.statusText,
+    error: false,
+    body: await response.json()
+  };
+}
 
-  // data.results = data.results
-  //   .filter(
-  //     (item, index, self) =>
-  //       index === self.findIndex((t) => t.match === item.match)
-  //   )
-  //   .slice(0, 10);
+export async function getTables(url: string): Promise<ResponseTablesType> {
+  const response = await fetch(url, { next: { revalidate: 600 } });
+
+  if (!response.ok)
+    return {
+      status: response.status,
+      statusText: response.statusText,
+      error: true,
+      body: {
+        count: 0,
+        next: null,
+        previous: null,
+        results: []
+      }
+    };
 
   return {
     status: response.status,
     statusText: response.statusText,
     error: false,
-    body: data
+    body: await response.json()
   };
 }

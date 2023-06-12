@@ -15,6 +15,7 @@ const initialTablesState = {
 };
 
 const initialFieldsState = {
+  codigo_tuss: false,
   termo: false,
   laboratorio: false,
   modelo: false,

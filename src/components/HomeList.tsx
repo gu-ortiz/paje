@@ -3,7 +3,7 @@ import HomeCard from 'components/HomeCard';
 import SkeletonList from 'components/SkeletonList';
 import { SearchContext } from 'context/Search';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { TermType } from 'types/term';
+import { TermType } from 'types/tuss';
 import { getTerms } from 'utils/api';
 import {
   getFieldsParam,
@@ -90,9 +90,13 @@ const HomeList = () => {
 
   return (
     <ul className="w-full flex flex-col gap-5">
-      {data.map((term, index) => (
-        <HomeCard key={index} term={term} />
-      ))}
+      {!loading && data.length <= 0 ? (
+        <li className="w-full text-xl text-center text-zinc-300">
+          Nenhum termo encontrado.
+        </li>
+      ) : (
+        data.map((term, index) => <HomeCard key={index} term={term} />)
+      )}
       {nextPageUrl && (
         <li className="w-full h-fit" ref={loader}>
           {loading && <SkeletonList />}

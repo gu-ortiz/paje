@@ -5,7 +5,7 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline';
 import { MouseEvent } from 'react';
-import { RecommendationType } from 'types/term';
+import { RecommendationType } from 'types/tuss';
 import { classNames } from 'utils/classnames';
 
 const Dropdown = ({
@@ -26,7 +26,10 @@ const Dropdown = ({
   handleDeletePreviousSearch: (recomendation: string) => void;
 }) => {
   return (
-    <Transition show={showDropdown} className="w-full flex flex-col pt-1">
+    <Transition
+      show={showDropdown}
+      className="w-full max-h-[90vh] flex flex-col pt-1 overflow-auto sm:scrollbar-thin sm:scrollbar-thumb-gray-800 sm:scrollbar-track-transparent"
+    >
       {previousSearches.length > 0 &&
         previousSearches.map((search) => (
           <div
@@ -39,14 +42,14 @@ const Dropdown = ({
           >
             <button
               onClick={() => handleRecomendationClick(search)}
-              className="w-full flex justify-start items-center focus:outline-none"
+              className="w-full flex flex-grow justify-start items-center focus:outline-none"
             >
               <ClockIcon className="block w-4 h-4 mr-2" />
-              {search}
+              <span className="flex-1 text-left">{search}</span>
             </button>
             <button
               onClick={() => handleDeletePreviousSearch(search)}
-              className="flex justify-start items-center text-white focus:outline-none"
+              className="flex flex-grow justify-start items-center text-white focus:outline-none"
             >
               <XMarkIcon className="block w-4 h-4" />
             </button>
@@ -64,7 +67,7 @@ const Dropdown = ({
             )}
           >
             <MagnifyingGlassIcon className="block w-4 h-4 mr-2" />
-            {recomendation.match}
+            <span className="flex-1 text-left">{recomendation.match}</span>
           </button>
         ))}
       <div className="w-full flex justify-center items-center px-4 sm:px-6 lg:px-8 py-2">

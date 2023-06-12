@@ -4,13 +4,22 @@ import {
   ArrowDownTrayIcon,
   ArrowTopRightOnSquareIcon,
   EllipsisHorizontalCircleIcon,
-  QuestionMarkCircleIcon
+  QuestionMarkCircleIcon,
+  Squares2X2Icon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import { classNames } from 'utils/classnames';
 
 const menuItems = [
+  {
+    name: 'Tabelas',
+    icon: (
+      <Squares2X2Icon className="block h-5 w-5 stroke-1" aria-hidden="true" />
+    ),
+    path: '/tabelas',
+    target: '_self'
+  },
   {
     name: 'Ajuda',
     icon: (

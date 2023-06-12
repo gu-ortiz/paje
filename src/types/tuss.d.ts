@@ -15,3 +15,12 @@ export type RecommendationType = {
   field: string;
   match: string;
 };
+
+export type TableType = {
+  id: number;
+  codigo_tabela: string;
+  descricao: string;
+  dt_inicio_vigencia: string;
+  dt_fim_vigencia: string;
+  dt_implantacao: string;
+};

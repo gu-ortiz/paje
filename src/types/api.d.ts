@@ -1,34 +1,50 @@
-import { RecommendationType, TermType } from './term';
+import { RecommendationType, TableType, TermType } from './term';
 
-export type ResponseTermsType = {
+export type ApiResponseTermsType = {
+  count: number;
   previous: string | null;
   next: string | null;
   results: TermType[];
 };
 
-export type ResponseRecommendationsType = {
+export type ApiResponseRecommendationsType = {
+  count: number;
   previous: string | null;
   next: string | null;
   results: RecommendationType[];
 };
 
-export type InternalResponseListType = {
-  status: number;
-  statusText: string;
-  error: boolean;
-  body: ResponseTermsType;
+export type ApiResponseTablesType = {
+  count: number;
+  previous: string | null;
+  next: string | null;
+  results: TableType[];
 };
 
-export type InternalResponseTermType = {
+export type ResponseTermType = {
   status: number;
   statusText: string;
   error: boolean;
   body: TermType;
 };
 
-export type InternalResponseRecommendationsType = {
+export type ResponseTermsType = {
   status: number;
   statusText: string;
   error: boolean;
-  body: ResponseRecommendationsType;
+  body: ApiResponseTermsType;
+};
+
+export type ResponseRecommendationsType = {
+  status: number;
+  statusText: string;
+  error: boolean;
+  body: ApiResponseRecommendationsType;
+};
+
+export type ResponseTablesType = {
+  status: number;
+  statusText: string;
+  error: boolean;
+  body: ApiResponseTablesType;
 };

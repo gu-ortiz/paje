@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { TermType } from 'types/term';
+import { TermType } from 'types/tuss';
 import { formatDate } from 'utils/date';
 
 const HomeCard = ({ term }: { term: TermType }) => {

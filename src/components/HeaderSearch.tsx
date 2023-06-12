@@ -1,22 +1,22 @@
 'use client';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import {
-  deleteSearch,
-  getPreviousSearches,
-  saveSearch
+    deleteSearch,
+    getPreviousSearches,
+    saveSearch
 } from 'cache/localStorage';
 import { SearchContext } from 'context/Search';
 import { useRouter } from 'next/navigation';
 import {
-  ChangeEvent,
-  KeyboardEvent,
-  MouseEvent,
-  useContext,
-  useEffect,
-  useRef,
-  useState
+    ChangeEvent,
+    KeyboardEvent,
+    MouseEvent,
+    useContext,
+    useEffect,
+    useRef,
+    useState
 } from 'react';
-import { RecommendationType } from 'types/term';
+import { RecommendationType } from 'types/tuss';
 import { getRecommendations } from 'utils/api';
 import { classNames } from 'utils/classnames';
 import { getFieldsParam, getQueryParam, getTablesParam } from 'utils/url';
@@ -67,7 +67,8 @@ const HeaderSearch = () => {
   };
 
   const handleDeletePreviousSearch = (recomendation: string) => {
-    setPreviousSearches(deleteSearch(recomendation));
+    deleteSearch(recomendation);
+    setPreviousSearches(getPreviousSearches(text));
     inputRef.current && inputRef.current.focus();
   };
 

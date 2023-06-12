@@ -28,7 +28,7 @@ const Filter = () => {
   return (
     <div className="w-full h-fit flex flex-col gap-3">
       <div className="w-full flex flex-col gap-2">
-        <label className="text-gray-800 text-xs font-bold">Tabelas</label>
+        <span className="text-gray-800 text-xs font-bold">Tabelas</span>
         {Object.keys(filterTables).map((table, i) => (
           <FilterCheckbox
             key={i}
@@ -42,7 +42,7 @@ const Filter = () => {
         {({ open }) => (
           <>
             <Disclosure.Panel className="w-full flex flex-col gap-2">
-              <label className="text-gray-800 text-xs font-bold">Campos</label>
+              <span className="text-gray-800 text-xs font-bold">Campos</span>
               {Object.keys(filterFields).map((field, i) => (
                 <FilterCheckbox
                   key={i}

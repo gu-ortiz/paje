@@ -1,7 +1,7 @@
 'use client';
 import { Tab } from '@headlessui/react';
 import { useState } from 'react';
-import { TermType } from 'types/term';
+import { TermType } from 'types/tuss';
 import { classNames } from 'utils/classnames';
 import { formatDate } from 'utils/date';
 import { getTermLabel } from 'utils/tuss';
