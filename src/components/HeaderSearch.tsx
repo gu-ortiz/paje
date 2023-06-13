@@ -6,6 +6,7 @@ import {
   saveSearch
 } from 'cache/localStorage';
 import { SearchContext } from 'context/Search';
+import { useDebounce } from 'hooks/useDebounce';
 import { useRouter } from 'next/navigation';
 import {
   ChangeEvent,
@@ -23,7 +24,7 @@ import { getFieldsParam, getQueryParam, getTablesParam } from 'utils/url';
 import Dropdown from './Dropdown';
 
 const HeaderSearch = () => {
-  const { searchText, setSearchText, filterFields, filterTables } =
+  const { setSearchText, filterFields, filterTables } =
     useContext(SearchContext);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -34,6 +35,7 @@ const HeaderSearch = () => {
   );
   const [previousSearches, setPreviousSearches] = useState<string[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const debouncedText = useDebounce(text, 300);
 
   const handleSearch = (searchText?: string) => {
     const finalSearchText = searchText || text;
@@ -92,21 +94,17 @@ const HeaderSearch = () => {
   };
 
   useEffect(() => {
-    setPreviousSearches(getPreviousSearches(text));
-  }, [text]);
-
-  useEffect(() => {
-    setText(searchText);
-  }, [searchText, filterFields, filterTables]);
+    setPreviousSearches(getPreviousSearches(debouncedText));
+  }, [debouncedText]);
 
   useEffect(() => {
     setRecomendations([]);
-    if (text.length > 2) {
+    if (debouncedText.length > 2) {
       const fetchData = async () => {
         const response = await getRecommendations(
           `${process.env.NEXT_PUBLIC_API_URL}/autocomplete/?${getTablesParam(
             filterTables
-          )}${getFieldsParam(filterFields)}${getQueryParam(text)}`
+          )}${getFieldsParam(filterFields)}${getQueryParam(debouncedText)}`
         );
 
         setRecomendations(response.body.results);
@@ -114,7 +112,7 @@ const HeaderSearch = () => {
 
       fetchData();
     }
-  }, [text, filterFields, filterTables]);
+  }, [debouncedText, filterFields, filterTables]);
 
   return (
     <div className="w-full sm:w-2/3 h-full flex justify-center items-center">
