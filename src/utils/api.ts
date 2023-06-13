@@ -89,7 +89,7 @@ export async function getRecommendations(
 }
 
 export async function getTables(url: string): Promise<ResponseTablesType> {
-  const response = await fetch(url, { next: { revalidate: 0 } });
+  const response = await fetch(url, { next: { revalidate: 600 } });
 
   if (!response.ok)
     return {

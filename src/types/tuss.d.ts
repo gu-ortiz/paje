@@ -6,6 +6,8 @@ export type TermType = {
   dt_inicio_vigencia: string;
   dt_fim_vigencia: string;
   dt_implantacao: string;
+  forma_de_envio: string;
+  grupo: string;
   extra_fields: { [key: string]: string } | null;
   anvisa_fields: { [key: string]: string } | null;
 };

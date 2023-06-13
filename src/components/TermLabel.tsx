@@ -8,7 +8,7 @@ const TermLabel = ({ label, text }: { label: string; text: string }) => {
     <div
       className={classNames(
         'w-full flex flex-col gap-2',
-        label === 'descricao_detalhada' ? 'col-span-2' : ''
+        label === 'descricao_detalhada' ? 'lg:col-span-2' : ''
       )}
     >
       <label className="text-sm font-medium text-white">

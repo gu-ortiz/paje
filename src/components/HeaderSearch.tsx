@@ -109,8 +109,6 @@ const HeaderSearch = () => {
           )}${getFieldsParam(filterFields)}${getQueryParam(text)}`
         );
 
-        console.log(response);
-
         setRecomendations(response.body.results);
       };
 
