@@ -1,22 +1,26 @@
 import TermPanel from 'components/TermPanel';
-import { getTerm } from 'utils/api';
+import { getAnvisa, getTerm } from 'utils/api';
 
 export default async function Page({
   params: { id }
 }: {
   params: { id: string };
 }) {
-  const data = await getTerm(
+  const dataTerm = await getTerm(
     `${process.env.NEXT_PUBLIC_API_URL}/termos_tuss/${id}/`
   );
 
-  if (data.error) {
-    throw new Error(String(data.status));
+  const dataAnvisa = await getAnvisa(
+    `${process.env.NEXT_PUBLIC_API_URL}/anvisa/${id}/`
+  );
+
+  if (dataTerm.error) {
+    throw new Error(String(dataTerm.status));
   }
 
   return (
     <>
-      <TermPanel term={data.body} />
+      <TermPanel term={dataTerm.body} anvisa={dataAnvisa.body} />
     </>
   );
 }

@@ -13,8 +13,8 @@ export function getTableLabel(id: string | number) {
   }
 }
 
-export function getTermLabel(term: string) {
-  switch (term) {
+export function getTermLabel(field: string) {
+  switch (field) {
     case 'apresentacao':
       return 'Apresentação';
     case 'assinatura_digital':
@@ -58,16 +58,16 @@ export function getTermLabel(term: string) {
     case 'termo':
       return 'Termo';
     default:
-      return normalizeTerm(term);
+      return normalizeTerm(field);
   }
 }
 
-function normalizeTerm(term: string) {
-  term = term.replace(/_/g, ' ');
-  term = term
+function normalizeTerm(field: string) {
+  field = field.replace(/_/g, ' ');
+  field = field
     .toLowerCase()
     .split(' ')
     .map((word) => word.charAt(0).toUpperCase() + word.substring(1))
     .join(' ');
-  return term;
+  return field;
 }

@@ -1,12 +1,22 @@
 'use client';
 import { Tab } from '@headlessui/react';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
+import { AnvisaType } from 'types/anvisa';
 import { TermType } from 'types/tuss';
 import { classNames } from 'utils/classnames';
 import { formatDate } from 'utils/date';
+import { getTermLabel } from 'utils/tuss';
+import Anvisa from './Anvisa';
+import SkeletonTermLabel from './SkeletonTermLabel';
 import TermLabel from './TermLabel';
 
-const TermPanel = ({ term }: { term: TermType }) => {
+const TermPanel = ({
+  term,
+  anvisa
+}: {
+  term: TermType;
+  anvisa: AnvisaType | Record<string, never>;
+}) => {
   const [options, setOptions] = useState({
     TUSS: {
       codigo_tuss: term.codigo_tuss,
@@ -25,9 +35,9 @@ const TermPanel = ({ term }: { term: TermType }) => {
     if ([19, 20].includes(term.tabela))
       setOptions((prevOptions) => ({
         ...prevOptions,
-        Anvisa: term.anvisa_fields || {}
+        Anvisa: anvisa
       }));
-  }, [term.anvisa_fields, term.tabela]);
+  }, [anvisa, term.tabela]);
 
   return (
     <Tab.Group>
@@ -73,34 +83,34 @@ const TermPanel = ({ term }: { term: TermType }) => {
               key={idx}
               className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
             >
-              {Object.keys(info).length > 0
-                ? Object.keys(info)
+              {idx === 0 ? (
+                <>
+                  {Object.keys(info)
                     .filter((i) => i !== 'extra_fields')
                     .map((label) => (
                       <TermLabel
                         key={label}
-                        label={label}
+                        label={getTermLabel(label)}
                         text={String(info[label as keyof typeof info])}
                       />
-                    ))
-                : idx === 1 && (
-                    <div className="w-full text-center col-span-2">
-                      <p className="text-base text-white">Desculpe</p>
-                      <h1 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
-                        A API da Anvisa parece estar fora do ar
-                      </h1>
-                      <p className="mt-6 text-base leading-7 text-white">
-                        Tente novamente mais tarde
-                      </p>
-                    </div>
-                  )}
-              {Object.keys(extraFields).map((label) => (
-                <TermLabel
-                  key={label}
-                  label={label}
-                  text={String(extraFields[label])}
-                />
-              ))}
+                    ))}
+                  {Object.keys(extraFields).map((label) => (
+                    <TermLabel
+                      key={label}
+                      label={getTermLabel(label)}
+                      text={String(extraFields[label])}
+                    />
+                  ))}
+                </>
+              ) : (
+                <Suspense
+                  fallback={[...Array(8)].map((_, i) => (
+                    <SkeletonTermLabel key={i} />
+                  ))}
+                >
+                  <Anvisa data={anvisa} />
+                </Suspense>
+              )}
             </Tab.Panel>
           );
         })}

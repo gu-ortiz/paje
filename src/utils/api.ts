@@ -1,6 +1,7 @@
 'use server';
 import { notFound } from 'next/navigation';
 import {
+  ResponseAnvisaType,
   ResponseRecommendationsType,
   ResponseTablesType,
   ResponseTermType,
@@ -25,9 +26,27 @@ export async function getTerm(url: string): Promise<ResponseTermType> {
         dt_inicio_vigencia: '',
         dt_fim_vigencia: '',
         dt_implantacao: '',
-        extra_fields: null,
-        anvisa_fields: null
+        extra_fields: null
       }
+    };
+
+  return {
+    status: response.status,
+    statusText: response.statusText,
+    error: false,
+    body: await response.json()
+  };
+}
+
+export async function getAnvisa(url: string): Promise<ResponseAnvisaType> {
+  const response = await fetch(url, { next: { revalidate: 600 } });
+
+  if (!response.ok)
+    return {
+      status: response.status,
+      statusText: response.statusText,
+      error: true,
+      body: {}
     };
 
   return {

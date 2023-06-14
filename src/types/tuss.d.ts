@@ -9,7 +9,6 @@ export type TermType = {
   forma_de_envio: string;
   grupo: string;
   extra_fields: { [key: string]: string } | null;
-  anvisa_fields: { [key: string]: string } | null;
 };
 
 export type RecommendationType = {

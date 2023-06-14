@@ -1,3 +1,4 @@
+import { AnvisaType } from './anvisa';
 import { RecommendationType, TableType, TermType } from './term';
 
 export type ApiResponseTermsType = {
@@ -26,6 +27,13 @@ export type ResponseTermType = {
   statusText: string;
   error: boolean;
   body: TermType;
+};
+
+export type ResponseAnvisaType = {
+  status: number;
+  statusText: string;
+  error: boolean;
+  body: AnvisaType | Record<string, never>;
 };
 
 export type ResponseTermsType = {
