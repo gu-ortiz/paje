@@ -1,12 +1,27 @@
 import { Tab } from '@headlessui/react';
+import { useEffect, useState } from 'react';
 import {
   AnvisaApresentacoesType,
   AnvisaFabricantesType,
   AnvisaType
 } from 'types/anvisa';
+import { getAnvisa } from 'utils/api';
 import TermLabel from './TermLabel';
 
-const Anvisa = ({ data }: { data: AnvisaType | Record<string, never> }) => {
+const Anvisa = ({ id }: { id: string }) => {
+  const [data, setData] = useState<AnvisaType | Record<string, never>>({});
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getAnvisa(
+        `${process.env.NEXT_PUBLIC_API_URL}/anvisa/${id}/`
+      );
+
+      setData(response.body);
+    };
+
+    fetchData();
+  }, [id]);
+
   return Object.keys(data).length > 0 ? (
     <div>
       <TermLabel label="Produto" text={data.produto} />
