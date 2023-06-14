@@ -1,7 +1,9 @@
 'use client';
 import { Tab } from '@headlessui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { ResponseAnvisaType } from 'types/api';
 import { TermType } from 'types/tuss';
+import { getAnvisa } from 'utils/api';
 import { classNames } from 'utils/classnames';
 import { formatDate } from 'utils/date';
 import { getTermLabel } from 'utils/tuss';
@@ -20,7 +22,26 @@ const TermPanel = ({ id, term }: { id: string; term: TermType }) => {
     grupo: term.grupo || '',
     extra_fields: term.extra_fields || {}
   });
+  const [anvisa, setAnvisa] = useState<ResponseAnvisaType>({
+    status: 200,
+    statusText: '',
+    error: false,
+    body: {}
+  });
   const [showAnvisa] = useState([19, 20].includes(term.tabela));
+
+  useEffect(() => {
+    if (showAnvisa) {
+      const fetchData = async () => {
+        const response = await getAnvisa(
+          `${process.env.NEXT_PUBLIC_API_URL}/anvisa/${id}`
+        );
+        setAnvisa(response);
+      };
+
+      fetchData();
+    }
+  }, [id, showAnvisa]);
 
   return (
     <Tab.Group>
@@ -82,7 +103,7 @@ const TermPanel = ({ id, term }: { id: string; term: TermType }) => {
           ))}
         </Tab.Panel>
         <Tab.Panel className="w-full">
-          <Anvisa id={id} />
+          <Anvisa response={anvisa} />
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>
