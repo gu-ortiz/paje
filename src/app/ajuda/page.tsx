@@ -69,7 +69,7 @@ export default async function Page() {
         <Disclosure key={i}>
           {({ open }) => (
             <>
-              <Disclosure.Button className="w-full flex justify-between items-center rounded-lg bg-gray-800 px-4 py-2 text-left text-sm text-white hover:bg-gray-700 focus:outline-none">
+              <Disclosure.Button className="w-full flex justify-between items-center rounded-md bg-gray-800 px-4 py-2 text-left text-sm text-white hover:bg-gray-700 focus:outline-none">
                 <span>{qa.question}</span>
                 <ChevronDownIcon
                   className={`${

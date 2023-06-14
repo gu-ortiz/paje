@@ -119,7 +119,7 @@ const HeaderSearch = () => {
       <div className="relative w-full h-10 flex flex-col items-start">
         <div
           ref={dropdownRef}
-          className="absolute w-full z-50 flex flex-col rounded-lg bg-white shadow-md"
+          className="absolute w-full z-50 flex flex-col rounded-md bg-white shadow-md"
         >
           <div
             className={classNames(
@@ -130,7 +130,7 @@ const HeaderSearch = () => {
             <input
               type="text"
               className={classNames(
-                'w-full h-10 pl-4 pr-0 py-2 rounded-l-lg focus:outline-none',
+                'w-full h-10 pl-4 pr-0 py-2 rounded-l-md focus:outline-none',
                 'text-zinc-300 bg-transparent placeholder:text-zinc-300 focus:text-gray-800'
               )}
               placeholder="Pesquisar..."
@@ -145,7 +145,7 @@ const HeaderSearch = () => {
             <button
               onClick={handleClear}
               className={classNames(
-                'relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg',
+                'relative w-12 h-10 pr-px flex justify-center items-center rounded-r-md',
                 'text-zinc-300 bg-transparent focus:outline-none',
                 'disabled:text-zinc-300',
                 !text

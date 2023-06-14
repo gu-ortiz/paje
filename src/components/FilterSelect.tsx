@@ -44,14 +44,14 @@ const FilterSelect = ({
         <div className="relative">
           <div
             className={classNames(
-              'relative w-full h-9 flex rounded-lg cursor-default overflow-hidden focus:outline-none',
+              'relative w-full h-9 flex rounded-md cursor-default overflow-hidden focus:outline-none',
               'bg-white border border-gray-800 shadow-md sm:text-sm'
             )}
           >
             <Combobox.Input
               type="text"
               className={classNames(
-                'w-full h-full pl-5 pr-0 py-2 rounded-l-lg focus:outline-none peer',
+                'w-full h-full pl-5 pr-0 py-2 rounded-l-md focus:outline-none peer',
                 'text-zinc-300 bg-white focus:text-gray-800 placeholder:text-zinc-300'
               )}
               placeholder="Selecionar"
@@ -63,7 +63,7 @@ const FilterSelect = ({
             />
             <Combobox.Button
               className={classNames(
-                'relative w-12 h-full pr-px flex justify-center items-center rounded-r-lg',
+                'relative w-12 h-full pr-px flex justify-center items-center rounded-r-md',
                 'text-zinc-300 bg-white focus:outline-none',
                 'peer-focus:text-gray-800 hover:text-gray-800 active:text-gray-600'
               )}

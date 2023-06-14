@@ -16,10 +16,10 @@ const TermField = ({ text }: { text: string }) => {
   };
 
   return (
-    <div className="w-full flex group rounded-lg">
+    <div className="w-full flex group rounded-md">
       <input
         type="text"
-        className="w-full h-10 pl-5 pr-0 py-2 rounded-l-lg text-gray-800 bg-white placeholder:text-zinc-300 cursor-text focus:outline-none"
+        className="w-full h-10 pl-5 pr-0 py-2 rounded-l-md text-gray-800 bg-white placeholder:text-zinc-300 cursor-text focus:outline-none"
         placeholder=""
         spellCheck="false"
         value={text}
@@ -28,7 +28,7 @@ const TermField = ({ text }: { text: string }) => {
       <button
         onClick={handleClick}
         disabled={copied}
-        className="relative w-12 h-10 pr-px flex justify-center items-center rounded-r-lg text-zinc-300 bg-white active:hover:text-gray-600 focus:outline-none hover:text-gray-800"
+        className="relative w-12 h-10 pr-px flex justify-center items-center rounded-r-md text-zinc-300 bg-white active:hover:text-gray-600 focus:outline-none hover:text-gray-800"
       >
         {copied ? (
           <ClipboardDocumentCheckIcon

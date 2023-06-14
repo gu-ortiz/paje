@@ -1,12 +1,11 @@
 'use client';
 import { Tab } from '@headlessui/react';
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 import { TermType } from 'types/tuss';
 import { classNames } from 'utils/classnames';
 import { formatDate } from 'utils/date';
 import { getTermLabel } from 'utils/tuss';
 import Anvisa from './Anvisa';
-import SkeletonTermLabel from './SkeletonTermLabel';
 import TermLabel from './TermLabel';
 
 const TermPanel = ({ id, term }: { id: string; term: TermType }) => {
@@ -28,7 +27,7 @@ const TermPanel = ({ id, term }: { id: string; term: TermType }) => {
       <Tab.List
         className={classNames(
           'w-full flex rounded-t-md bg-white',
-          showAnvisa ? 'lg:w-4/6' : 'lg:w-2/6'
+          showAnvisa ? 'lg:w-full' : 'lg:w-1/2'
         )}
       >
         <Tab
@@ -61,7 +60,7 @@ const TermPanel = ({ id, term }: { id: string; term: TermType }) => {
       <Tab.Panels
         className={classNames(
           'w-full h-fit p-4 sm:p-6 lg:p-8 text-white',
-          'rounded-b-md lg:rounded-tr-md bg-gray-800 shadow-md overflow-hidden'
+          'rounded-b-md bg-gray-800 shadow-md overflow-hidden'
         )}
       >
         <Tab.Panel className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2">
@@ -82,14 +81,8 @@ const TermPanel = ({ id, term }: { id: string; term: TermType }) => {
             />
           ))}
         </Tab.Panel>
-        <Tab.Panel className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2">
-          <Suspense
-            fallback={[...Array(8)].map((_, i) => (
-              <SkeletonTermLabel key={i} />
-            ))}
-          >
-            <Anvisa id={id} />
-          </Suspense>
+        <Tab.Panel className="w-full">
+          <Anvisa id={id} />
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>

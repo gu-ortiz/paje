@@ -48,20 +48,20 @@ export type AnvisaArquivosType = {
 
 export type AnvisaType = {
   produto: string;
-  empresa: EmpresaType;
-  mensagem: MensagemType;
   nomeTecnico: string;
   registro: string;
+  processo: string;
   cancelado: boolean;
   dataCancelamento: null | string;
-  processo: string;
-  apresentacoes: ApresentacoesType[];
-  fabricantes: FabricantesType[];
-  risco: RiscoType;
-  vencimento: VencimentoType;
   publicacao: null | string;
   apresentacaoModelo: boolean;
-  arquivos: ArquivosType[];
   processoMedidaCautelar: null | string;
+  empresa: EmpresaType;
+  mensagem: MensagemType;
+  risco: RiscoType;
+  vencimento: VencimentoType;
+  apresentacoes: ApresentacoesType[];
+  fabricantes: FabricantesType[];
+  arquivos: ArquivosType[];
   tooltip: string;
 };

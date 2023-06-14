@@ -75,7 +75,7 @@ const Dropdown = ({
           onClick={handleSearchClick}
           disabled={disabledSearch}
           className={classNames(
-            'w-24 h-9 pr-px flex justify-center items-center rounded-lg',
+            'w-24 h-9 pr-px flex justify-center items-center rounded-md',
             'text-white bg-gray-800 focus:outline-none',
             'peer-focus:text-gray-800 hover:bg-gray-600',
             'disabled:bg-zinc-300'

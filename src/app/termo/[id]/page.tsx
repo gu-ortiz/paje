@@ -7,7 +7,7 @@ export default async function Page({
   params: { id: string };
 }) {
   const dataTerm = await getTerm(
-    `${process.env.NEXT_PUBLIC_API_URL}/termos_tuss/${id}/`
+    `${process.env.NEXT_PUBLIC_API_URL}/termos_tuss/${id}`
   );
 
   if (dataTerm.error) {

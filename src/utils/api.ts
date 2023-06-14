@@ -39,7 +39,6 @@ export async function getTerm(url: string): Promise<ResponseTermType> {
 }
 
 export async function getAnvisa(url: string): Promise<ResponseAnvisaType> {
-  await new Promise((resolve) => setTimeout(resolve, 10000));
   const response = await fetch(url, { next: { revalidate: 600 } });
 
   if (!response.ok)

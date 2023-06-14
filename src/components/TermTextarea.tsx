@@ -17,10 +17,10 @@ const TermTextarea = ({ text }: { text: string }) => {
   };
 
   return (
-    <div className="w-full flex group rounded-lg">
+    <div className="w-full flex group rounded-md">
       <textarea
         className={classNames(
-          'w-full h-40 pl-5 pr-0 py-2 rounded-l-lg text-gray-800 bg-white placeholder:text-zinc-300 cursor-text resize-none focus:outline-none',
+          'w-full h-40 pl-5 pr-0 py-2 rounded-l-md text-gray-800 bg-white placeholder:text-zinc-300 cursor-text resize-none focus:outline-none',
           'sm:scrollbar-thin sm:scrollbar-thumb-gray-800 sm:scrollbar-track-transparent'
         )}
         placeholder=""
@@ -32,7 +32,7 @@ const TermTextarea = ({ text }: { text: string }) => {
         onClick={handleClick}
         disabled={copied}
         className={classNames(
-          'relative w-12 pr-px flex justify-center items-center rounded-r-lg focus:outline-none',
+          'relative w-12 pr-px flex justify-center items-center rounded-r-md focus:outline-none',
           'text-zinc-300 bg-white active:hover:text-gray-600 focus:outline-none hover:text-gray-800'
         )}
       >
