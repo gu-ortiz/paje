@@ -20,17 +20,10 @@ Pajé é uma aplicação web que permite a pesquisa de dados das tabelas TUSS (T
 ## Como executar a aplicação
 
 1. Clone este repositório em sua máquina;
-2. Instale as dependências com o comando `npm install` ou `yarn install`;
-3. Rode a aplicação com o comando `npm run dev` ou `yarn dev`;
-4. Acesse a aplicação em seu navegador pelo endereço `http://localhost:3000`.
-
-## Como contribuir
-
-Se você deseja contribuir com o desenvolvimento da aplicação, siga as instruções abaixo:
-
-1. Faça um fork deste repositório;
-2. Crie uma nova branch com a feature ou correção que deseja implementar;
-3. Envie um pull request com suas alterações.
+2. Crie suas variáveis de ambiente baseado no arquivo `.env.example`, executando o comando `cp .env.example .env`;
+3. Instale as dependências com o comando `npm install` ou `yarn install`;
+4. Rode a aplicação com o comando `npm run dev` ou `yarn dev`;
+5. Acesse a aplicação em seu navegador pelo endereço `http://localhost:3000`.
 
 ## Licença
 
