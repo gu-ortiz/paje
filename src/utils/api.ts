@@ -1,5 +1,4 @@
 'use server';
-import { notFound } from 'next/navigation';
 import {
   ResponseAnvisaType,
   ResponseRecommendationsType,
@@ -10,8 +9,6 @@ import {
 
 export async function getTerm(url: string): Promise<ResponseTermType> {
   const response = await fetch(url, { next: { revalidate: 600 } });
-
-  if (response.status === 404) notFound();
 
   if (!response.ok)
     return {
