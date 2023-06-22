@@ -48,94 +48,105 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
         <TermLabel label="Negativo" text={String(data.mensagem.negativo)} />
       </div>
 
-      <h3 className="text-lg font-semibold mt-5 mb-2">Apresentações</h3>
-      <Tab.Group>
-        <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md overflow-x-auto whitespace-nowrap no-scrollbar">
-          {data.apresentacoes.map(
-            (apresentacao: AnvisaApresentacoesType, index: number) => (
-              <Tab
-                key={index}
-                className={({ selected }) =>
-                  classNames(
-                    'flex-1 text-sm rounded-md font-semibold p-1.5 leading-4 focus:outline-none',
-                    selected
-                      ? 'bg-gray-800 text-white'
-                      : 'bg-transparent text-gray-800 hover:bg-gray-600 hover:text-white'
-                  )
-                }
-              >
-                {apresentacao.modelo}
-              </Tab>
-            )
-          )}
-        </Tab.List>
+      {data?.apresentacoes?.length > 0 && (
+        <>
+          <h3 className="text-lg font-semibold mt-5 mb-2">Apresentações</h3>
+          <Tab.Group>
+            <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md overflow-x-auto whitespace-nowrap no-scrollbar">
+              {data.apresentacoes.map(
+                (apresentacao: AnvisaApresentacoesType, index: number) => (
+                  <Tab
+                    key={index}
+                    className={({ selected }) =>
+                      classNames(
+                        'flex-1 text-sm rounded-md font-semibold p-1.5 leading-4 focus:outline-none',
+                        selected
+                          ? 'bg-gray-800 text-white'
+                          : 'bg-transparent text-gray-800 hover:bg-gray-600 hover:text-white'
+                      )
+                    }
+                  >
+                    {apresentacao.modelo.split(' ')[0]}
+                  </Tab>
+                )
+              )}
+            </Tab.List>
 
-        <Tab.Panels className="max-w-full overflow-x-auto">
-          {data.apresentacoes.map(
-            (apresentacao: AnvisaApresentacoesType, index: number) => (
-              <Tab.Panel
-                key={index}
-                className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
-              >
-                <TermLabel label="Modelo" text={String(apresentacao.modelo)} />
-                <TermLabel
-                  label="Componente"
-                  text={String(apresentacao.componente)}
-                />
-                <TermLabel
-                  label="Apresentação"
-                  text={String(apresentacao.apresentacao)}
-                />
-              </Tab.Panel>
-            )
-          )}
-        </Tab.Panels>
-      </Tab.Group>
+            <Tab.Panels className="max-w-full overflow-x-auto">
+              {data.apresentacoes.map(
+                (apresentacao: AnvisaApresentacoesType, index: number) => (
+                  <Tab.Panel
+                    key={index}
+                    className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
+                  >
+                    <TermLabel
+                      label="Modelo"
+                      text={String(apresentacao.modelo)}
+                    />
+                    <TermLabel
+                      label="Componente"
+                      text={String(apresentacao.componente)}
+                    />
+                    <TermLabel
+                      label="Apresentação"
+                      text={String(apresentacao.apresentacao)}
+                    />
+                  </Tab.Panel>
+                )
+              )}
+            </Tab.Panels>
+          </Tab.Group>
+        </>
+      )}
 
-      <h3 className="text-lg font-semibold mt-5 mb-2">Fabricantes</h3>
-      <Tab.Group>
-        <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md">
-          {data.fabricantes.map(
-            (fabricante: AnvisaFabricantesType, index: number) => (
-              <Tab
-                key={index}
-                className={({ selected }) =>
-                  classNames(
-                    'flex-1 text-sm rounded-md font-semibold p-1.5 leading-4 focus:outline-none',
-                    selected
-                      ? 'bg-gray-800 text-white'
-                      : 'bg-transparent text-gray-800'
-                  )
-                }
-              >
-                {fabricante.razaoSocial}
-              </Tab>
-            )
-          )}
-        </Tab.List>
+      {data?.fabricantes?.length > 0 && (
+        <>
+          <h3 className="text-lg font-semibold mt-5 mb-2">Fabricantes</h3>
+          <Tab.Group>
+            <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md">
+              {data.fabricantes.map(
+                (fabricante: AnvisaFabricantesType, index: number) => (
+                  <Tab
+                    key={index}
+                    className={({ selected }) =>
+                      classNames(
+                        'flex-1 text-sm rounded-md font-semibold p-1.5 leading-4 focus:outline-none',
+                        selected
+                          ? 'bg-gray-800 text-white'
+                          : 'bg-transparent text-gray-800'
+                      )
+                    }
+                  >
+                    {fabricante.razaoSocial}
+                  </Tab>
+                )
+              )}
+            </Tab.List>
 
-        <Tab.Panels className="w-full">
-          {data.fabricantes.map(
-            (fabricante: AnvisaFabricantesType, index: number) => (
-              <Tab.Panel
-                key={index}
-                className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
-              >
-                <TermLabel
-                  label="Atividade"
-                  text={String(fabricante.atividade)}
-                />
-                <TermLabel
-                  label="Razão Social"
-                  text={String(fabricante.razaoSocial)}
-                />
-                <TermLabel label="País" text={String(fabricante.pais)} />
-                <TermLabel label="Local" text={String(fabricante.local)} />
-              </Tab.Panel>
-            )
-          )}
-        </Tab.Panels>
-      </Tab.Group>
+            <Tab.Panels className="w-full">
+              {data.fabricantes.map(
+                (fabricante: AnvisaFabricantesType, index: number) => (
+                  <Tab.Panel
+                    key={index}
+                    className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
+                  >
+                    <TermLabel
+                      label="Atividade"
+                      text={String(fabricante.atividade)}
+                    />
+                    <TermLabel
+                      label="Razão Social"
+                      text={String(fabricante.razaoSocial)}
+                    />
+                    <TermLabel label="País" text={String(fabricante.pais)} />
+                    <TermLabel label="Local" text={String(fabricante.local)} />
+                  </Tab.Panel>
+                )
+              )}
+            </Tab.Panels>
+          </Tab.Group>
+        </>
+      )}
 
       <h3 className="text-lg font-semibold mt-5 mb-2">Risco</h3>
       <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2">
@@ -149,69 +160,80 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
         <TermLabel label="Descrição" text={String(data.vencimento.descricao)} />
       </div>
 
-      <h3 className="text-lg font-semibold mt-5 mb-2">Arquivos</h3>
-      <Tab.Group>
-        <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md">
-          {data.arquivos.map((arquivo: AnvisaArquivosType, index: number) => (
-            <Tab
-              key={index}
-              className={({ selected }) =>
-                classNames(
-                  'flex-1 text-sm rounded-md font-semibold p-1.5 leading-4 focus:outline-none',
-                  selected
-                    ? 'bg-gray-800 text-white'
-                    : 'bg-transparent text-gray-800'
+      {data?.arquivos?.length > 0 && (
+        <>
+          <h3 className="text-lg font-semibold mt-5 mb-2">Arquivos</h3>
+          <Tab.Group>
+            <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md">
+              {data.arquivos.map(
+                (arquivo: AnvisaArquivosType, index: number) => (
+                  <Tab
+                    key={index}
+                    className={({ selected }) =>
+                      classNames(
+                        'flex-1 text-sm rounded-md font-semibold p-1.5 leading-4 focus:outline-none',
+                        selected
+                          ? 'bg-gray-800 text-white'
+                          : 'bg-transparent text-gray-800'
+                      )
+                    }
+                  >
+                    {arquivo.nomeArquivo}
+                  </Tab>
                 )
-              }
-            >
-              {arquivo.nomeArquivo}
-            </Tab>
-          ))}
-        </Tab.List>
+              )}
+            </Tab.List>
 
-        <Tab.Panels className="max-w-full overflow-x-auto">
-          {data.arquivos.map((arquivo: AnvisaArquivosType, index: number) => (
-            <Tab.Panel
-              key={index}
-              className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
-            >
-              <TermLabel
-                label="Nome completo"
-                text={String(arquivo.nomeCompleto)}
-              />
-              <TermLabel
-                label="Nome do arquivo"
-                text={String(arquivo.nomeArquivo)}
-              />
-              <TermLabel
-                label="Tipo de arquivo"
-                text={String(arquivo.tipoArquivo)}
-              />
-              <TermLabel
-                label="Código do anexo"
-                text={String(arquivo.anexoCod)}
-              />
-              <TermLabel
-                label="Tipo de anexo"
-                text={String(arquivo.tipoAnexo)}
-              />
-              <TermLabel
-                label="Descricao do tipo de anexo"
-                text={String(arquivo.descricaoTipoAnexo)}
-              />
-              <TermLabel
-                label="Expediente"
-                text={String(arquivo.nuExpediente)}
-              />
-              <TermLabel label="Processo" text={String(arquivo.nuProcesso)} />
-              <TermLabel
-                label="Data de envio"
-                text={formatDate(arquivo.dtEnvio)}
-              />
-            </Tab.Panel>
-          ))}
-        </Tab.Panels>
-      </Tab.Group>
+            <Tab.Panels className="max-w-full overflow-x-auto">
+              {data.arquivos.map(
+                (arquivo: AnvisaArquivosType, index: number) => (
+                  <Tab.Panel
+                    key={index}
+                    className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
+                  >
+                    <TermLabel
+                      label="Nome completo"
+                      text={String(arquivo.nomeCompleto)}
+                    />
+                    <TermLabel
+                      label="Nome do arquivo"
+                      text={String(arquivo.nomeArquivo)}
+                    />
+                    <TermLabel
+                      label="Tipo de arquivo"
+                      text={String(arquivo.tipoArquivo)}
+                    />
+                    <TermLabel
+                      label="Código do anexo"
+                      text={String(arquivo.anexoCod)}
+                    />
+                    <TermLabel
+                      label="Tipo de anexo"
+                      text={String(arquivo.tipoAnexo)}
+                    />
+                    <TermLabel
+                      label="Descrição do tipo de anexo"
+                      text={String(arquivo.descricaoTipoAnexo)}
+                    />
+                    <TermLabel
+                      label="Expediente"
+                      text={String(arquivo.nuExpediente)}
+                    />
+                    <TermLabel
+                      label="Processo"
+                      text={String(arquivo.nuProcesso)}
+                    />
+                    <TermLabel
+                      label="Data de envio"
+                      text={formatDate(arquivo.dtEnvio)}
+                    />
+                  </Tab.Panel>
+                )
+              )}
+            </Tab.Panels>
+          </Tab.Group>
+        </>
+      )}
 
       <h3 className="text-lg font-semibold mt-5 mb-2">Outras informações</h3>
       <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2">
