@@ -14,8 +14,8 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
   const data = response.body;
 
   return Object.keys(response.body).length > 0 ? (
-    <div className="w-full flex flex-col">
-      <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2">
+    <div className="w-full flex flex-col focus:outline-none">
+      <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2 focus:outline-none">
         <TermLabel label="Produto" text={String(data.produto)} />
         <TermLabel label="Nome técnico" text={String(data.nomeTecnico)} />
         <TermLabel label="Registro" text={String(data.registro)} />
@@ -28,7 +28,7 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
       </div>
 
       <h3 className="text-lg font-semibold mt-5 mb-2">Empresa</h3>
-      <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2">
+      <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2 focus:outline-none">
         <TermLabel label="CNPJ" text={String(data.empresa.cnpj)} />
         <TermLabel
           label="Razão social"
@@ -41,7 +41,7 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
       </div>
 
       <h3 className="text-lg font-semibold mt-5 mb-2">Mensagem</h3>
-      <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2">
+      <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2 focus:outline-none">
         <TermLabel label="Situação" text={String(data.mensagem.situacao)} />
         <TermLabel label="Resolução" text={String(data.mensagem.resolucao)} />
         <TermLabel label="Motivo" text={String(data.mensagem.motivo)} />
@@ -72,12 +72,12 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
               )}
             </Tab.List>
 
-            <Tab.Panels className="max-w-full overflow-x-auto">
+            <Tab.Panels className="w-full focus:outline-none">
               {data.apresentacoes.map(
                 (apresentacao: AnvisaApresentacoesType, index: number) => (
                   <Tab.Panel
                     key={index}
-                    className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
+                    className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2 focus:outline-none"
                   >
                     <TermLabel
                       label="Modelo"
@@ -103,7 +103,7 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
         <>
           <h3 className="text-lg font-semibold mt-5 mb-2">Fabricantes</h3>
           <Tab.Group>
-            <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md">
+            <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md overflow-x-auto whitespace-nowrap no-scrollbar">
               {data.fabricantes.map(
                 (fabricante: AnvisaFabricantesType, index: number) => (
                   <Tab
@@ -123,12 +123,12 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
               )}
             </Tab.List>
 
-            <Tab.Panels className="w-full">
+            <Tab.Panels className="w-full focus:outline-none">
               {data.fabricantes.map(
                 (fabricante: AnvisaFabricantesType, index: number) => (
                   <Tab.Panel
                     key={index}
-                    className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
+                    className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2 focus:outline-none"
                   >
                     <TermLabel
                       label="Atividade"
@@ -149,13 +149,13 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
       )}
 
       <h3 className="text-lg font-semibold mt-5 mb-2">Risco</h3>
-      <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2">
+      <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2 focus:outline-none">
         <TermLabel label="Sigla" text={String(data.risco.sigla)} />
         <TermLabel label="Descrição" text={String(data.risco.descricao)} />
       </div>
 
       <h3 className="text-lg font-semibold mt-5 mb-2">Vencimento</h3>
-      <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2">
+      <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2 focus:outline-none">
         <TermLabel label="Data" text={formatDate(data.vencimento.data)} />
         <TermLabel label="Descrição" text={String(data.vencimento.descricao)} />
       </div>
@@ -164,7 +164,7 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
         <>
           <h3 className="text-lg font-semibold mt-5 mb-2">Arquivos</h3>
           <Tab.Group>
-            <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md">
+            <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md overflow-x-auto whitespace-nowrap no-scrollbar">
               {data.arquivos.map(
                 (arquivo: AnvisaArquivosType, index: number) => (
                   <Tab
@@ -184,12 +184,12 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
               )}
             </Tab.List>
 
-            <Tab.Panels className="max-w-full overflow-x-auto">
+            <Tab.Panels className="w-full focus:outline-none">
               {data.arquivos.map(
                 (arquivo: AnvisaArquivosType, index: number) => (
                   <Tab.Panel
                     key={index}
-                    className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2"
+                    className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2 focus:outline-none"
                   >
                     <TermLabel
                       label="Nome completo"
@@ -236,7 +236,7 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
       )}
 
       <h3 className="text-lg font-semibold mt-5 mb-2">Outras informações</h3>
-      <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2">
+      <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2 focus:outline-none">
         <TermLabel label="Publicação" text={String(data.publicacao)} />
         <TermLabel
           label="Apresentação do modelo"
