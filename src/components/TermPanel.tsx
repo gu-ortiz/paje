@@ -84,7 +84,7 @@ const TermPanel = ({ id, term }: { id: string; term: TermType }) => {
           'rounded-b-md bg-gray-800 shadow-md overflow-hidden'
         )}
       >
-        <Tab.Panel className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2">
+        <Tab.Panel className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2 focus:outline-none">
           {Object.keys(data)
             .filter((i) => i !== 'extra_fields')
             .map((label) => (
@@ -102,7 +102,7 @@ const TermPanel = ({ id, term }: { id: string; term: TermType }) => {
             />
           ))}
         </Tab.Panel>
-        <Tab.Panel className="w-full">
+        <Tab.Panel className="w-full focus:outline-none">
           <Anvisa response={anvisa} />
         </Tab.Panel>
       </Tab.Panels>

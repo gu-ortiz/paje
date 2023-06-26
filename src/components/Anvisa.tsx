@@ -12,8 +12,9 @@ import TermLabel from './TermLabel';
 
 const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
   const data = response.body;
+  console.log(response);
 
-  return Object.keys(response.body).length > 0 ? (
+  return Object.keys(data || {}).length > 0 ? (
     <div className="w-full flex flex-col focus:outline-none">
       <div className="w-full gap-4 grid grid-cols-1 lg:grid-cols-2 focus:outline-none">
         <TermLabel label="Produto" text={String(data.produto)} />
@@ -52,7 +53,7 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
         <>
           <h3 className="text-lg font-semibold mt-5 mb-2">Apresentações</h3>
           <Tab.Group>
-            <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md overflow-x-auto whitespace-nowrap no-scrollbar">
+            <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md overflow-x-auto whitespace-nowrap sm:scrollbar-thin sm:scrollbar-thumb-gray-800 sm:scrollbar-track-transparent">
               {data.apresentacoes.map(
                 (apresentacao: AnvisaApresentacoesType, index: number) => (
                   <Tab
@@ -103,7 +104,7 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
         <>
           <h3 className="text-lg font-semibold mt-5 mb-2">Fabricantes</h3>
           <Tab.Group>
-            <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md overflow-x-auto whitespace-nowrap no-scrollbar">
+            <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md overflow-x-auto whitespace-nowrap sm:scrollbar-thin sm:scrollbar-thumb-gray-800 sm:scrollbar-track-transparent">
               {data.fabricantes.map(
                 (fabricante: AnvisaFabricantesType, index: number) => (
                   <Tab
@@ -164,7 +165,7 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
         <>
           <h3 className="text-lg font-semibold mt-5 mb-2">Arquivos</h3>
           <Tab.Group>
-            <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md overflow-x-auto whitespace-nowrap no-scrollbar">
+            <Tab.List className="w-full flex justify-between items-center p-0.5 gap-0.5 mb-2 bg-white rounded-md overflow-x-auto whitespace-nowrap sm:scrollbar-thin sm:scrollbar-thumb-gray-800 sm:scrollbar-track-transparent">
               {data.arquivos.map(
                 (arquivo: AnvisaArquivosType, index: number) => (
                   <Tab
@@ -253,7 +254,7 @@ const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
     <div className="w-full text-center col-span-2">
       <p className="text-base text-white">Desculpe</p>
       <h1 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
-        {response.status === 500
+        {response.status === 404
           ? 'O insumo que você está procurando não foi encontrado na API da Anvisa'
           : 'A API da Anvisa parece estar fora do ar'}
       </h1>
