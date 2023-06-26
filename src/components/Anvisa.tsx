@@ -12,7 +12,6 @@ import TermLabel from './TermLabel';
 
 const Anvisa = ({ response }: { response: ResponseAnvisaType }) => {
   const data = response.body;
-  console.log(response);
 
   return Object.keys(data || {}).length > 0 ? (
     <div className="w-full flex flex-col focus:outline-none">
