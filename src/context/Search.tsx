@@ -11,7 +11,7 @@ const initialTablesState = {
   '19': false,
   '20': false,
   '22': false,
-  demaisTerminologias: false
+  '99': false
 };
 
 const initialFieldsState = {

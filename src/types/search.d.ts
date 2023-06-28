@@ -7,12 +7,7 @@ export type SearchContextType = {
   setFilterFields: (value: Record<FilterFieldKeysType, boolean>) => void;
 };
 
-export type FilterTableKeysType =
-  | '18'
-  | '19'
-  | '20'
-  | '22'
-  | 'demaisTerminologias';
+export type FilterTableKeysType = '18' | '19' | '20' | '22' | '99';
 
 export type FilterFieldKeysType =
   | 'codigo_tuss'
