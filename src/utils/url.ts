@@ -25,6 +25,10 @@ export function getFieldsParam(
   return fields ? `&fields=${fields}` : '';
 }
 
+export function getTableParam(id: string) {
+  return id ? `&tabela=${id}` : '';
+}
+
 export function getTablesParam(
   filterTables: Record<FilterTableKeysType, boolean>
 ) {

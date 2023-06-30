@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getTables } from 'utils/api';
 
 export default async function Page() {
@@ -10,8 +11,10 @@ export default async function Page() {
   return (
     <div className="w-full gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {data.body.results.map((table) => (
-        <div
+        <Link
           key={table.id}
+          href={`tabelas/${table.codigo_tabela}`}
+          prefetch={false}
           className="w-full h-24 rounded-md bg-white shadow-md overflow-hidden text-gray-800"
         >
           <div className="w-full flex flex-col px-4 py-4 gap-1 text-sm">
@@ -20,7 +23,7 @@ export default async function Page() {
             </span>
             <span className="">{table.descricao}</span>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
