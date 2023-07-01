@@ -13,7 +13,7 @@ export default async function Page() {
       {data.body.results.map((table) => (
         <Link
           key={table.id}
-          href={`tabelas/${table.codigo_tabela}`}
+          href={`${table.codigo_tabela}`}
           prefetch={false}
           className="w-full h-24 rounded-md bg-white shadow-md overflow-hidden text-gray-800"
         >
