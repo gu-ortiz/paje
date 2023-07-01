@@ -32,7 +32,7 @@ const menuItems = [
     target: '_self'
   },
   {
-    name: 'TUSS',
+    name: 'Download TUSS',
     icon: (
       <ArrowDownTrayIcon
         className="block h-5 w-5 stroke-1"
